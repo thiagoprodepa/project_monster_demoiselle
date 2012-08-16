@@ -19,7 +19,6 @@
 	<description></description>
 	<url></url>
 
-
 	<properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
             message: -->
