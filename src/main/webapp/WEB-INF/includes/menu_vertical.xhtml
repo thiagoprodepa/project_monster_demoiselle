@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:a4j="http://richfaces.org/a4j" 
+	xmlns:rich="http://richfaces.org/rich">
+	<!-- Menu vertical -->
+	<h:form id="form-menu-vertical">
+		<h:commandLink action="/private/principal/principal.xhtml"
+			title="Voltar para página principal">
+			<h:graphicImage value="/images/logo.png" styleClass="logo" />
+		</h:commandLink>
+
+	    <rich:panelMenu style="width: 176px;" mode="ajax" expandSingle="true"
+	        iconExpandedGroup="disc" iconCollapsedGroup="disc" 
+	        iconExpandedTopGroup="chevronUp" iconGroupTopPosition="left" 
+	        iconCollapsedTopGroup="chevronDown" iconCollapsedTopPosition="right"
+	        iconGroupPosition="left">
+	      	<rich:panelMenuGroup label="Manutenção"
+	      		iconCollapsed="/images/icons/cog.png" iconExpanded="chevronDown">
+				<rich:panelMenuItem label="Aplicação" actionListener="#{aplicacaoAction.limparLista}"
+					action="/private/aplicacao/aplicacao_list.xhtml" icon="/images/ico_documento.gif"
+					rendered="#{menuControleAcessoAction.manterAplicacao}" />
+				<rich:panelMenuItem label="Funcionalidade" actionListener="#{funcionalidadeAction.limparLista}"
+					action="/private/funcionalidade/funcionalidade_list.xhtml" icon="/images/icons/plugin.png"
+					rendered="#{menuControleAcessoAction.manterFuncionalidade}" />
+				<rich:panelMenuItem label="Operação" actionListener="#{operacaoAction.limparLista}"
+					action="/private/operacao/operacao_list.xhtml" icon="/images/icons/wrench.png"
+					rendered="#{menuControleAcessoAction.manterOperacao}" />
+				<rich:panelMenuItem label="Perfil" actionListener="#{perfilAction.limparLista}"
+					action="/private/perfil/perfil_list.xhtml" icon="/images/icons/group_key.png"
+					rendered="#{menuControleAcessoAction.manterPerfil}" />
+				<rich:panelMenuItem label="Usuário" actionListener="#{usuarioAction.limparLista}"
+					action="/private/usuario/usuario_list.xhtml" icon="/images/icons/group.png"
+					rendered="#{menuControleAcessoAction.manterUsuario}" />
+				<rich:panelMenuItem label="Situação do Usuário" actionListener="#{usuarioAction.limparLista}"
+					action="/private/usuario/situacao_usuario_list.xhtml"
+					icon="/images/icons/group_gear.png"/>
+			</rich:panelMenuGroup>
+
+			<rich:panelMenuGroup label="Consultas"
+				iconCollapsed="/images/bot_ver_dados.gif" iconExpanded="chevronDown">
+	      		<rich:panelMenuItem label="Operação" actionListener="#{operacaoAction.limparLista}"
+	      			action="/private/operacao/consultar_operacao_list.xhtml" icon="/images/icons/magnifier.png" />
+				<rich:panelMenuItem label="Usuário" actionListener="#{usuarioAction.limparLista}"
+					action="/private/usuario/consultar_usuario_list.xhtml" icon="/images/icons/magnifier.png" />
+			</rich:panelMenuGroup>
+
+			<rich:panelMenuGroup label="Relatórios" iconCollapsed="/images/icons/report.png"
+				iconExpanded="chevronDown" rendered="#{menuControleAcessoAction.gerarRelatorios}">
+				<rich:panelMenuItem label="Total de Usuários por Sistema"
+					action="#{reportAction.printRelatorioEstAtisticaPorSistema}"
+					icon="/images/icons/page_white_acrobat.png" mode="server" />
+				<rich:panelMenuItem label="Total de Usuários por Órgão"
+					action="#{reportAction.printRelatorioEstAtisticaPorOrgao}"
+					icon="/images/icons/page_white_acrobat.png" mode="server" />
+				<rich:panelMenuItem label="Total de Usuários Órgão/Sistema"
+					action="#{reportAction.printRelatorioEstAtisticaPorOrgaoSistema}"
+					icon="/images/icons/page_white_acrobat.png" mode="server" />
+				<rich:panelMenuItem label="Total de Usuários Sistema/Órgão"
+					action="#{reportAction.printRelatorioEstAtisticaPorSistemaOrgao}"
+					icon="/images/icons/page_white_acrobat.png" mode="server" />
+				<rich:panelMenuItem label="Relação de Usuários por Sistema"
+					action="/private/relatorio/lst_usuarios_por_sistema.xhtml"
+					icon="/images/icons/page_white_acrobat.png" />
+				<rich:panelMenuItem label="Relação de Usuários por Órgão"
+					action="/private/relatorio/lst_usuarios_por_orgao.xhtml"
+					icon="/images/icons/page_white_acrobat.png" />
+				<rich:panelMenuItem label="Relação de Usuários por Sistema/Órgao"
+					action="/private/relatorio/lst_usuarios_por_sistema_orgao.xhtml"
+					icon="/images/icons/page_white_acrobat.png" />
+				<rich:panelMenuItem label="Relação de Usuários por Órgao/Sistema"
+					action="/private/relatorio/lst_usuarios_por_orgao_sistema.xhtml"
+					icon="/images/icons/page_white_acrobat.png" />
+			</rich:panelMenuGroup>
+
+			<rich:panelMenuGroup label="Delegação"
+				iconCollapsed="/images/icons/key.png" iconExpanded="chevronDown"
+				rendered="#{menuControleAcessoAction.manterDelegacao}">
+				<rich:panelMenuItem label="Perfil" actionListener="#{delegarPerfilAction.limparLista}"
+					action="/private/delegar_perfil/delegar_perfil_list.xhtml" icon="/images/icons/group_key.png"
+					rendered="#{menuControleAcessoAction.delegacaoPerfil}" />
+				<rich:panelMenuItem label="Gerência" actionListener="#{delegarGerenciaAction.limparLista}"
+					action="/private/delegar_gerencia/delegar_gerencia_list.xhtml" icon="/images/icons/shield.png"
+					rendered="#{menuControleAcessoAction.delegacaoGerencia}" />
+			</rich:panelMenuGroup>
+
+			<rich:panelMenuGroup label="Web Service"
+				iconCollapsed="/images/icons/world.png" iconExpanded="chevronDown"
+				rendered="#{menuControleAcessoAction.manterWebService}">
+				<rich:panelMenuItem label="Usuário"
+					actionListener="#{wsUsuarioAction.limparLista}" icon="/images/icons/group.png"
+					rendered="#{menuControleAcessoAction.manterUsuarioWebService}"
+					action="/private/ws_usuario/ws_usuario_list.xhtml" />
+					<rich:panelMenuItem label="Alterar Senha do Usuário"
+					actionListener="#{wsUsuarioAction.limparLista}" icon="/images/icons/key.png"
+					rendered="#{menuControleAcessoAction.manterAlterarSenhaUsuarioWebService}"
+					action="/private/ws_alterar_senha/ws_alterar_senha_usuario_list.xhtml" />
+				<rich:panelMenuItem label="Operação"
+					actionListener="#{wsOperacaoAction.limparLista}" icon="/images/icons/wrench.png"
+					rendered="#{menuControleAcessoAction.manterOperacaoWebService}"
+					action="/private/ws_operacao/ws_operacao_list.xhtml" />
+				<rich:panelMenuItem label="Perfil"
+					actionListener="#{wsPerfilAction.limparLista}" icon="/images/icons/group_key.png"
+					rendered="#{menuControleAcessoAction.manterPerfilWebService}"
+					action="/private/ws_perfil/ws_perfil_list.xhtml" />
+			</rich:panelMenuGroup>
+	    </rich:panelMenu>
+
+	    <h:graphicImage value="/images/cap.gif" styleClass="banner" />
+	</h:form>
+</ui:composition>

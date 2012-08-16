@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jstl/core">
+	<h:form id="form-top-bar">
+		
+		<h:outputText value="testetete" styleClass="teste" />
+	
+		<rich:toolBar styleClass="top-bar" height="32px">
+			<rich:toolBarGroup itemSeparator="line">
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputLink value="#{ssoClientAction.getServerContext()}"
+								styleClass="top-link" target="_blank">
+								<h:graphicImage value="/images/icons/governo_digital.png" styleClass="picture" />
+							</h:outputLink>
+							<h:outputText value="Governo Digital" styleClass="top-text" />
+						</h:panelGroup>
+					</f:facet>
+					<c:forEach items="#{authenticatedUser.aplicacoes}" var="item">
+						<rich:menuItem submitMode="none"
+							disabled="#{not(item.hasContexto(item)) or ssoClientAction.isClientApplication(item.id)}">
+							<h:outputLink value="#{item.contexto}" target="_blank"
+								rendered="#{item.hasContexto() and not(ssoClientAction.isClientApplication(item.id))}">
+								<h:outputText value="#{item.nome}" />
+							</h:outputLink>
+							<h:outputText value="#{item.nome}"
+								rendered="#{not(item.hasContexto()) or ssoClientAction.isClientApplication(item.id)}" />
+						</rich:menuItem>
+					</c:forEach>
+				</rich:dropDownMenu>
+			</rich:toolBarGroup>
+
+			<rich:toolBarGroup location="right" itemSeparator="line">
+				<h:panelGroup>
+					<h:graphicImage value="/images/icons/color_wheel.png"
+						title="Tema do sistema" styleClass="picture" />
+					<ul id="skin-menu" class="layout">
+				        <a4j:repeat var="skin" value="#{skinBean.skinSetItems}" iterationStatusVar="iterStatus">
+				            <li class="#{(skin==skinBean.skin) ? 'current-skin' : ''}"><h:link includeViewParams="true">
+				                    <a4j:outputPanel>#{skin}</a4j:outputPanel>
+				                    <f:param name="skin" value="#{skin}" />
+				                </h:link>
+				            </li>
+				        </a4j:repeat>
+				        <li class="label"><span>Select Skin:</span></li>
+				    </ul>
+					
+					
+					
+				</h:panelGroup>
+				<h:panelGroup styleClass="top-text">
+					<h:graphicImage value="/images/icons/user.png" title="Usuário" styleClass="picture" />
+					<h:outputText value="#{authenticatedUser.nome} (#{authenticatedUser.orgao.pessoa.sigla})" />
+				</h:panelGroup>
+				<h:panelGroup>
+					<a4j:commandLink action="#{ssoClientAction.efetuarLogout}"
+						title="Sair do sistema" styleClass="top-link">
+						<h:graphicImage value="/images/icons/door_out.png" styleClass="picture" />
+						<h:outputText value="Sair" />
+					</a4j:commandLink>
+				</h:panelGroup>
+			</rich:toolBarGroup>
+		</rich:toolBar>
+	</h:form>
+</ui:composition>

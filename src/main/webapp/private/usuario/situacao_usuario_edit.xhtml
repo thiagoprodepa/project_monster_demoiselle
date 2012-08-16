@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">
+		<h:outputText value="Alteração de Situação do Usuário" />
+	</ui:define>
+
+	<ui:define name="caminho">
+		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_edit.png" />
+		<h:outputText value="Situação do Usuário &#187; Alteração" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form-situacao-usuario">
+			<h:panelGrid id="form-usuario-inputs" columns="2" styleClass="grid"
+				columnClasses="column-label, column-control">
+				<h:outputLabel value="Nome: " for="situacao-usuario-nome" />
+				<h:outputText id="situacao-usuario-nome" value="#{usuarioDto.nome}" />
+
+				<h:outputLabel value="Situação: *" style="vertical-align: top;" for="situacao-usuario-situacao" />
+				<h:selectOneRadio id="situacao-usuario-situacao" value="#{historicoSituacaoDto.situacao}"
+					required="true" requiredMessage="É necessário informar a situação do usuário."
+					layout="pageDirection">
+					<s:selectItems value="#{tiposSituacao}" var="item" label="#{item.descricao}" />
+					<s:convertEnum />
+				</h:selectOneRadio>
+
+				<h:outputLabel value="Motivo: *" for="situacao-usuario-motivo" />
+				<h:inputText id="situacao-usuario-motivo" value="#{historicoSituacaoDto.motivo}"
+					required="true" requiredMessage="É necessário informar o motivo do usuário"
+					size="50" maxlength="250" />
+			</h:panelGrid>
+			
+			<hr size="1" />
+			<h:panelGrid columns="2" styleClass="grid"
+				columnClasses="column-label, column-control">
+				<h:outputText value="(*) Campo requerido" />
+				<h:panelGroup style="text-align: right;">
+					<a4j:commandLink id="botao-salvar" styleClass="orange-button"
+						action="#{usuarioAction.alterarSituacaoUsuario}" title="Confirmar alteração"
+						reRender="form-usuario">
+						<h:graphicImage value="/images/icons/disk.png" />
+						<h:outputText value="Salvar" />
+					</a4j:commandLink>
+					<rich:spacer width="10px" />
+					<a4j:commandLink id="botao-voltar" styleClass="secondary-button"
+						action="#{usuarioAction.voltarParaSituacao}" title="Voltar para pesquisa"
+						immediate="true">
+						<h:graphicImage value="/images/icons/arrow_undo.png" />
+						<h:outputText value="Voltar" />
+					</a4j:commandLink>
+				</h:panelGroup>
+			</h:panelGrid>
+
+			<rich:hotKey key="return" selector="#form-usuario-inputs"
+				handler="document.getElementById('form-situacao-usuario:botao-salvar').click();" />
+		</h:form>
+
+		<script language="JavaScript">
+        	function formFocus() {
+        		document.getElementById('form-situacao-usuario:situacao-usuario-situacao:0').focus();
+			}
+        	formFocus();
+        </script>
+	</ui:define>
+</ui:composition>

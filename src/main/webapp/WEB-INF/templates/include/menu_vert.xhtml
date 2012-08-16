@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	>
+
+	<h:panelGroup layout="block" styleClass="menu_vertical"	>
+		<h:outputText value="Um login vai bem" />
+		
+		<h:form id="interpassloginForm">
+			<div id="login_box" >
+				<div id="campos">
+					<div id="login_campo1">
+						<strong>Usuário</strong>: 
+						<h:inputText id="interpassuser" value="#{identity.username}" class="txt_conteudo" size="20" maxlength="30" required="true" requiredMessage="Informe o usuário." />
+					</div>
+
+					<div id="login_campo2">
+						<strong>Senha</strong>: 
+						<h:inputSecret id="interpasssenha" redisplay="false" value="#{identity.password}" class="txt_conteudo" size="20" maxlength="30" required="true" requiredMessage="Informe a senha." />
+					</div>
+
+					<div id="login_botao">
+						<h:commandButton value="Entrar" action="#{identity.login}" style="ft2" />
+					</div>
+
+				</div>
+			</div>
+		</h:form>
+		
+	</h:panelGroup>
+	<h:form id="form">
+	<h:panelGroup layout="block" styleClass="menu_vertical"	>
+	
+	<rich:panelMenu style="width:155px" itemMode="ajax" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
+                groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
+                topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" >
+                
+                <rich:panelMenuGroup label="Manters">
+                
+                    <rich:panelMenuItem label="Projetos"
+									action="#{planoCadastralAction.startConversation}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/planos_cadastrais.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea"/>
+									
+				    <rich:panelMenuItem label="Usuários"
+									action="#{planoCadastralAction.startConversation}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/planos_cadastrais.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea" />
+									
+				   <rich:panelMenuItem label="Resfis"
+									action="#{planoCadastralAction.startConversation}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/planos_cadastrais.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea" />
+													
+				   <rich:panelMenuItem label="Setores"
+									action="#{planoCadastralAction.startConversation}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/planos_cadastrais.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea" />
+				
+                </rich:panelMenuGroup>
+                
+     </rich:panelMenu>           
+		
+	</h:panelGroup>
+	</h:form>
+	
+</ui:composition>

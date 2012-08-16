@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+	<h:form id="form_menu">
+		<rich:toolBar>
+			<rich:toolBarGroup itemSeparator="line">
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="../../images/user_login.gif"
+								styleClass="pic" width="16" height="16" />
+							<h:outputText value="Acesso" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Alterar senha"
+						action="/casos_de_uso/usuario/alteracao_senha_form.xhtml"
+						icon="../../images/lock2.JPG" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:outputText value="Manutenção" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Aplicação"
+						actionListener="#{aplicacaoAction.limparLista}"
+						action="/casos_de_uso/aplicacao/aplicacao_lista.xhtml"
+						icon="../../images/ico_documento.gif"
+						rendered="#{menuControleAcessoAction.manterAplicacao}" />
+					<rich:menuItem value="Funcionalidade"
+						actionListener="#{funcionalidadeAction.limparLista}"
+						action="/casos_de_uso/funcionalidade/funcionalidade_lista.xhtml"
+						icon="../../images/lock5.jpg"
+						rendered="#{menuControleAcessoAction.manterFuncionalidade}" />
+					<rich:menuItem value="Operação"
+						actionListener="#{operacaoAction.limparLista}"
+						action="/casos_de_uso/operacao/operacao_lista.xhtml"
+						icon="../../images/ico_ferramentas.gif"
+						rendered="#{menuControleAcessoAction.manterOperacao}" />
+					<rich:menuItem value="Perfil"
+						actionListener="#{perfilAction.limparLista}"
+						action="/casos_de_uso/perfil/perfil_lista.xhtml"
+						icon="../../images/chat.gif"
+						rendered="#{menuControleAcessoAction.manterPerfil}" />
+					<rich:menuItem value="Usuário"
+						actionListener="#{usuarioAction.limparLista}"
+						action="/casos_de_uso/usuario/usuario_lista.xhtml"
+						icon="../../images/lock4.gif"
+						rendered="#{menuControleAcessoAction.manterUsuario}" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu>
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="../../images/bot_ver_dados.gif"
+								styleClass="pic" />
+							<h:outputText value="Consultar" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Operação"
+						actionListener="{perfilAction.limparLista}"
+						action="/casos_de_uso/operacao/operacao_consulta_lista.xhtml"
+						icon="../../images/ico_lupa.gif" />
+					<rich:menuItem value="Usuário"
+						actionListener="{perfilAction.limparLista}"
+						action="/casos_de_uso/usuario/usuario_consulta_lista.xhtml"
+						icon="../../images/ico_lupa.gif" />
+				</rich:dropDownMenu>
+
+				<rich:dropDownMenu
+					rendered="#{menuControleAcessoAction.gerarRelatorios}">
+					<f:facet name="label">
+						<h:panelGroup>
+							<h:graphicImage value="../../images/report.png" styleClass="pic" />
+							<h:outputText value="Relatórios" />
+						</h:panelGroup>
+					</f:facet>
+					<rich:menuItem value="Total de Usuários por Sistema"
+						action="#{reportAction.printRelatorioEstAtisticaPorSistema}"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Total de Usuários por Órgão"
+						action="#{reportAction.printRelatorioEstAtisticaPorOrgao}"
+						icon="../../images/usuario.gif" />
+
+					<rich:menuItem value="Total de Usuários Órgão/Sistema"
+						action="{reportAction.printRelatorioEstAtisticaPorOrgaoSistema}"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Total de Usuários Sistema/Órgão"
+						action="{reportAction.printRelatorioEstAtisticaPorSistemaOrgao}"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Relação de Usuários por Sistema"
+						action="/relatorio/paginas/lst_usuarios_por_sistema.xhtml"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Relação de Usuários por Órgão"
+						action="/relatorio/paginas/lst_usuarios_por_orgao.xhtml"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Relação de Usuários por Sistema/Órgao"
+						action="/relatorio/paginas/lst_usuarios_por_sistema_orgao.xhtml"
+						icon="../../images/usuario.gif" />
+					<rich:menuItem value="Relação de Usuários por Órgao/Sistema"
+						action="/relatorio/paginas/lst_usuarios_por_orgao_sistema.xhtml"
+						icon="../../images/usuario.gif" />
+				</rich:dropDownMenu>
+			</rich:toolBarGroup>
+
+			<rich:toolBarGroup location="right">
+				<rich:menuItem value="Sair" action="#{identity.logout}"
+					styleClass="header_text" selectClass="general_text"
+					icon="../../images/icons/disconnect.png" />
+			</rich:toolBarGroup>
+		</rich:toolBar>
+	</h:form>
+</ui:composition>

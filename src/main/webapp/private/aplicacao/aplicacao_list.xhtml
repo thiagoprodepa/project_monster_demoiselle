@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">Pesquisa de Aplicação</ui:define>
+
+	<ui:define name="caminho">
+		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_magnify.png" />
+		<h:outputText value="Aplicação &#187; Pesquisa" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form-pesquisa-aplicacao">
+			<h:panelGrid columns="2" styleClass="grid"
+				columnClasses="search-inputs, search-controls">
+				<h:panelGrid id="form-pesquisa-inputs" columns="2"
+					columnClasses="column-label, column-control">
+					<h:outputLabel value="Nome: " for="aplicacao-nome" />
+					<h:inputText id="aplicacao-nome" value="#{aplicacaoDto.nome}"
+						size="50" maxlength="100" />
+
+					<h:outputLabel value="Descrição: " for="aplicacao-descricao" />
+					<h:inputText id="aplicacao-descricao" value="#{aplicacaoDto.descricao}"
+						size="50" maxlength="100" />
+
+					<h:outputLabel value="Orgão Gestor: " for="aplicacao-orgao-gestor" />
+					<h:selectOneMenu id="aplicacao-orgao-gestor" value="#{aplicacaoDto.orgao}">
+						<s:selectItems id="aplicacao-orgao-gestor-item" value="#{orgaosAtivoCA}"
+							var="item" label="#{item.pessoa.sigla}"
+							noSelectionLabel="--- Todos ---" />
+						<s:convertEntity />
+					</h:selectOneMenu>
+
+					<h:outputLabel value="Situação: " for="aplicacao-situacao" />
+					<h:selectOneMenu id="aplicacao-situacao" value="#{aplicacaoDto.ativo}">
+						<s:selectItems id="aplicacao-situacao-item" value="#{tiposBoleano}"
+							var="item" label="#{item.situacao}"
+							noSelectionLabel="--- Todas ---" />
+						<s:convertEnum />
+					</h:selectOneMenu>
+				</h:panelGrid>
+
+				<h:panelGroup id="form-pesquisa-controls" layout="block">
+					<a4j:commandLink id="botao-pesquisar" action="#{aplicacaoAction.buscar}" type="submit"
+						reRender="resultados" oncomplete="formFocus();">
+						<h:panelGroup layout="block" styleClass="primary-button">
+							<h:graphicImage value="/images/icons/magnifier.png" />
+							<h:outputText value="Pesquisar" />
+						</h:panelGroup>
+					</a4j:commandLink>
+					<rich:spacer height="10px" rendered="#{s:hasRole('0001000400001')}" />
+					<a4j:commandLink action="#{aplicacaoAction.selecionarCadastro}"
+						immediate="true" rendered="#{s:hasRole('0001000400001')}">
+						<h:panelGroup layout="block" styleClass="secondary-button">
+							<h:graphicImage value="/images/icons/application_form_add.png" />
+							<h:outputText value="Nova" />
+						</h:panelGroup>
+					</a4j:commandLink>
+				</h:panelGroup>
+			</h:panelGrid>
+
+			<rich:hotKey key="return" selector="#form-pesquisa-inputs"
+				handler="document.getElementById('form-pesquisa-aplicacao:botao-pesquisar').click();" />
+		</h:form>
+	</ui:define>
+
+	<ui:define name="complemento">
+		<!-- Resultado da pesquisa -->
+		<h:form id="form-lista-aplicacao">
+			<h:panelGroup id="resultados">
+				<h:panelGroup rendered="#{aplicacoes.rowCount == 0}">
+					<h:outputText value="Nenhum resultado encontrado." />
+				</h:panelGroup>
+
+				<rich:dataTable id="aplicacoes"
+					value="#{aplicacoes}" var="aplicacao" rows="10" rowKeyVar="indice"
+					cellpadding="0" cellspacing="0" width="100%" border="0"
+					rendered="#{aplicacoes.rowCount > 0}">
+					<rich:column id="column-indice" styleClass="w1 text_right">
+						<f:facet name="header" />
+						<h:outputText value="#{(indice + 1)}" />
+					</rich:column>
+
+					<rich:column id="column-codigo" styleClass="w1 text_right"
+						sortBy="#{aplicacao.id}">
+						<f:facet name="header">
+							<h:outputText value="Código" />
+						</f:facet>
+						<h:outputText value="#{aplicacao.id}" />
+					</rich:column>
+
+					<rich:column id="column-nome" styleClass="text_left"
+						sortBy="#{aplicacao.nome}">
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{aplicacao.nome}" />
+					</rich:column>
+
+					<rich:column id="column-orgao-gestor" styleClass="text_left"
+						sortBy="#{aplicacao.orgao}">
+						<f:facet name="header">
+							<h:outputText value="Órgão Gestor" />
+						</f:facet>
+						<h:outputText value="#{aplicacao.orgao.pessoa.sigla}" />
+					</rich:column>
+
+					<rich:column id="column-situacao" styleClass="w1 text_center"
+						sortBy="#{aplicacao.ativo.situacao}">
+						<f:facet name="header">
+							<h:outputText value="Situação" />
+						</f:facet>
+						<h:outputText value="#{aplicacao.ativo.situacao}" />
+					</rich:column>
+
+					<rich:column styleClass="w1">
+						<f:facet name="header" />
+						<a4j:commandLink action="#{aplicacaoAction.selecionarVisualizacao(aplicacao)}"
+							oncomplete="#{rich:component('aplicacao-modal-panel')}.show();"
+							reRender="aplicacao-modal-panel"
+							ajaxSingle="true">
+							<h:graphicImage value="/images/icons/zoom_in.png" />
+						</a4j:commandLink>
+					</rich:column>
+
+					<rich:column styleClass="w1" rendered="#{s:hasRole('0001000400002')}">
+						<f:facet name="header" />
+						<a4j:commandLink action="#{aplicacaoAction.selecionarAlteracao(aplicacao)}"
+							ajaxSingle="true">
+							<h:graphicImage value="/images/icons/application_form_edit.png" />
+						</a4j:commandLink>
+					</rich:column>
+
+					<f:facet name="footer">
+						<rich:datascroller id="paginador" for="aplicacoes" maxPages="10"
+							stepControls="hide" renderIfSinglePage="false" />
+					</f:facet>
+				</rich:dataTable>
+			</h:panelGroup>
+		</h:form>
+
+		<rich:modalPanel id="aplicacao-modal-panel" minWidth="600" minHeight="320" moveable="true">
+            <f:facet name="header">
+                <h:outputText value="Aplicação" />
+            </f:facet>
+            <f:facet name="controls">
+            	<h:graphicImage styleClass="modal-panel-close-icon" value="/images/icons/close.png"
+            		onclick="#{rich:component('aplicacao-modal-panel')}.hide();" />
+            </f:facet>
+
+            <h:form>
+            	<h:panelGroup layout="block" style="max-height: 260px; overflow: auto;">
+					<h:panelGrid columns="2" styleClass="grid"
+						columnClasses="column-label, column-control">
+						<h:outputLabel value="Código: " />
+						<h:outputText id="aplicacao-codigo" value="#{aplicacaoAction.aplicacaoDtoSelecionado.id}" />
+
+						<h:outputLabel value="Nome: " for="aplicacao-nome" />
+						<h:outputText id="aplicacao-nome" value="#{aplicacaoAction.aplicacaoDtoSelecionado.nome}" />
+
+						<h:outputLabel value="Descrição: " for="aplicacao-descricao" />
+						<h:outputText id="aplicacao-descricao" value="#{aplicacaoAction.aplicacaoDtoSelecionado.descricao}" />
+
+						<h:outputLabel value="Órgão Gestor: " for="aplicacao-orgao-gestor" />
+						<h:outputText id="aplicacao-orgao-gestor" value="#{aplicacaoAction.aplicacaoDtoSelecionado.orgao}" />
+
+						<h:outputLabel value="Contexto: " for="aplicacao-descricao" />
+						<h:outputText id="aplicacao-contexto" value="#{aplicacaoAction.aplicacaoDtoSelecionado.contexto}" />
+
+						<h:outputLabel value="Logo: " for="aplicacao-imagem" />
+						<h:panelGroup id="aplicacao-logo-panel">
+							<s:graphicImage id="aplicacao-logo" value="#{aplicacaoAction.aplicacaoDtoSelecionado.logo}" rendered="#{aplicacaoAction.aplicacaoDtoSelecionado.hasLogo()}">
+								<s:transformImageSize height="96" maintainRatio="true" />  
+							</s:graphicImage>
+							<h:graphicImage id="aplicacao-no-logo" value="/images/no-logo.png" rendered="#{!aplicacaoAction.aplicacaoDtoSelecionado.hasLogo()}" />
+						</h:panelGroup>
+
+						<h:outputLabel value="Situação: " for="aplicacao-situacao" />
+						<h:outputText id="aplicacao-situacao" value="#{aplicacaoAction.aplicacaoDtoSelecionado.ativo.situacao}" />
+					</h:panelGrid>
+					</h:panelGroup>
+				<hr size="1" />
+				<h:panelGrid columns="2" styleClass="grid"
+					columnClasses="column-label, column-control">
+					<rich:spacer />
+					<h:panelGroup style="text-align: right;">
+						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
+							onclick="#{rich:component('aplicacao-modal-panel')}.hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+        </rich:modalPanel>
+
+        <script language="JavaScript">
+        	function formFocus() {
+        		document.getElementById('form-pesquisa-aplicacao:aplicacao-nome').focus();
+			}
+        	formFocus();
+        </script>
+	</ui:define>
+</ui:composition>

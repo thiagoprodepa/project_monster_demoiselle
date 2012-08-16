@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:rich="http://richfaces.org/rich"> 
+
+	<div class="linha_horizontal" />
+
+	<h:panelGroup id="barArea" layout="block">
+		<div id="barra_naveg">
+			<div id="caminho_naveg" style="font-weight: bold; width:60%">
+				<strong>Estou em: </strong>
+				<span>
+					<s:link action="/seguranca/principal/principal.seam"> <h:graphicImage value="/images/home.png" style="border:0" /> </s:link>
+					<h:outputText value=" > "/>
+				</span>
+			</div>
+	
+			<div id="barra_acess">
+			</div>
+		</div>
+		<div class="linha_horizontal" ></div>
+	</h:panelGroup>
+</ui:composition>

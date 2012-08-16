@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!--
+Template principal com menu na horizontal, vertical e corpo.
+-->
+<f:view contentType="text/html"
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:ui="http://java.sun.com/jsf/facelets"
+        xmlns:h="http://java.sun.com/jsf/html"
+        xmlns:f="http://java.sun.com/jsf/core"
+        xmlns:a4j="http://richfaces.org/a4j"
+        xmlns:s="http://jboss.com/products/seam/taglib"
+        xmlns:rich="http://richfaces.org/rich"
+        >
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:s="http://jboss.com/products/seam/taglib" 
+      xmlns:a4j="http://richfaces.org/a4j"
+      xml:lang="pt_BR" lang="pt_BR">
+       
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="keywords" content="XHTML,Acessibilidade,CSS,CSS Menu,Estilo,Folhas Estilo,Layout CSS,Layout Sites,Menu CSS,Paginas Web,Web Design,Web Standards,Webdesign,Tableless" />
+		<meta name="author" content="PRODEPA" />
+		<meta name="copyright" content="Copyright 2010 - PRODEPA" />
+		<link rel="shortcut icon" href="../../images/bar_icon.ico" type="image/x-icon" />
+		
+		<!-- CSS -->
+		<h:outputStylesheet library="css" name="default.css" target="head"/>
+		<h:outputStylesheet library="css" name="rich.css" target="head" />
+		<h:outputStylesheet library="css" name="fonts.css" target="head" />
+		<h:outputStylesheet library="css" name="login.css" target="head" />
+		<h:outputStylesheet library="css" name="fontsize_print.css" target="head"/>
+		
+		
+		<!-- JS
+		<h:outputScript library="js" name="" target="head"/>
+		<h:outputScript library="js" name="jquerymaskedinput.js" target="head"/>
+		<h:outputScript library="js" name="jquery.alphanumeric.js" target="head"/>
+		<h:outputScript library="js" name="keyFilter.js" target="head"/>
+		<h:outputScript library="js" name="textsize.js" target="head"/>
+        <h:outputScript library="js" name="form_effect.js" target="head"/>
+		 -->
+        
+		<title>
+			<h:outputText value="Showcase"/> | <h:outputText value=" "/> <ui:insert name="titulo"/>
+		</title>
+		
+	<!-- Ropdapé dinãmico -->
+	<h:outputStylesheet target="head">
+		#content {
+			width: 100%;
+			padding-bottom: 27px; /* Diferença para o rodapé não cobrir uma parte do contendo, é o mesmo valor da altura do rodapé */
+		}
+		
+		#wrap {
+			height: auto !important; /* Necessário para alguns browsers modernos */
+			height: 100%; /* Para o Internet Explorer */
+			min-height: 100%; /* Necessário para alguns browsers modernos */
+			position: relative;
+		}
+	</h:outputStylesheet>
+	
+	<f:loadBundle basename="messages" var="msg" />
+	
+	</h:head>
+
+<h:body>
+
+<div id="wrap">
+
+<div id="content">
+
+	<!-- Nome e logo do sistema -->
+	<ui:insert name="header">
+		<ui:include src="include/header.xhtml" />
+	</ui:insert>
+
+	<!-- Menu na horizontal
+	-->
+	<ui:insert name="menu_horiz">
+		<ui:include src="include/barra_navegacao.xhtml"/>
+	</ui:insert>
+	
+	<h:panelGrid columns="4" id="defaultPanel" cellpadding="0" cellspacing="0" 
+				 columnClasses="colMenu, colSpace, colContent, colSpace" width="100%">
+				 
+		<h:panelGroup>
+			<!-- Menu na vertical -->
+			<div id="cont1" class="ft2">
+				<ui:insert name="header_menu_vert">
+					<h:panelGroup layout="block" styleClass="header_menu_vertical">
+						<h:outputText value="Fase Atual: " style="font-weight:bold;"/>	
+					</h:panelGroup>	
+				</ui:insert>
+				
+				<ui:insert name="menu_vert">
+					<ui:include src="include/menu_vert.xhtml"/>
+					<!-- 
+					<ui:include src="include/menu_vert_instituicao.xhtml"/>
+					 -->
+				</ui:insert>	
+			</div>
+		</h:panelGroup>
+		
+		<h:panelGroup></h:panelGroup>
+		
+		<h:panelGroup>
+			<!-- Conteudo da Pagina -->
+			<div id="cont2" class="ft2">
+              <s:validateAll>
+				<ui:insert name="mensagem">
+					<ui:include src="include/mensagem.xhtml" rendered="#{not empty facesMessages.currentMessages}"/>
+				</ui:insert>	
+				<ui:insert name="pesquisa"/>
+				<ui:insert name="conteudo1"/>
+				<br />
+				<ui:insert name="conteudo2"/>
+				<br />
+				<ui:insert name="conteudo3"/>
+              </s:validateAll>
+			</div>
+		</h:panelGroup>
+		
+		<h:panelGroup></h:panelGroup>
+	</h:panelGrid>
+	
+</div><!-- /#content -->
+
+	<!-- Rodape -->
+	<ui:insert name="footer">
+		<ui:include src="include/footer.xhtml"/>
+	</ui:insert>	
+
+</div><!-- /#wrap -->
+	
+   <rich:jQuery id="mskKeyFilterDocuments" selector=".mskKeyFilterDocuments" 
+                query="keyfilter(/[0-9 \- \/ \.]/i);" timing="domready"/> 
+                
+   <rich:jQuery id="mskKeyFilterNumber" selector=".mskKeyFilterNumber" 
+                query="keyfilter(/[0-9]/i);" timing="domready"/>
+                
+   <rich:jQuery id="mskEmail" selector=".mskEmail" 
+                query="keyfilter(/[a-z0-9_\.\-@]/i);" timing="domready"/>
+	
+</h:body>
+</html>
+</f:view>

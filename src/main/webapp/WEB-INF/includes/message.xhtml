@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<rich:messages id="message-full"
+		layout="table" styleClass="area-mensagem message-#{facesContext.maximumSeverity}"
+		passedLabel="Transação efetuada com sucesso."
+		infoClass="info" warnClass="warn" errorClass="error" fatalClass="fatal" 
+		var="messages" ajaxRendered="true">
+		<f:facet name="passedMarker">
+			<h:graphicImage value="/images/icons/accept.png" />
+		</f:facet>
+		<f:facet name="infoMarker">
+			<h:graphicImage value="/images/icons/information.png" />
+		</f:facet>
+		<f:facet name="warnMarker">
+			<h:graphicImage value="/images/icons/error.png" />
+		</f:facet>
+		<f:facet name="errorMarker">
+			<h:graphicImage value="/images/icons/exclamation.png" />
+		</f:facet>
+		<f:facet name="fatalMarker">
+			<h:graphicImage value="/images/icons/bomb.png" />
+		</f:facet>
+	</rich:messages>
+</ui:composition>

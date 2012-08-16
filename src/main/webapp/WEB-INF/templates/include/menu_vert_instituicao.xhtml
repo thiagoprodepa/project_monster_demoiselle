@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	>
+
+	<h:panelGroup layout="block" styleClass="menu_vertical">
+		<rich:panelMenu id="menuInstitution" mode="ajax" style="width: 98%;"
+			iconExpandedGroup="disc" iconCollapsedGroup="disc"
+			iconExpandedTopGroup="chevronUp"
+			iconCollapsedTopGroup="chevronDown"
+			rendered="#{identity.loggedIn}">
+
+			<rich:panelMenu id="menuInstituicao2" mode="ajax" style="width: 98%;"
+				iconExpandedGroup="disc" iconCollapsedGroup="disc"
+				iconExpandedTopGroup="chevronUp"
+				iconCollapsedTopGroup="chevronDown"
+				>
+	
+				<rich:panelMenuGroup label="Instituição" 
+									 expanded="true"
+									 iconExpanded="/images/menus/instituicoes.png"		
+									 iconCollapsed="/images/menus/instituicoes.png"
+									 >
+					
+					<rich:panelMenuItem label="Identificar Instituição"
+									action="#{manterCodigoIEAction.startConversation}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/instituicao.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea"/>
+									
+					<rich:panelMenuItem label="Gerenciar Matrículas"
+									action="#{cargaAptosAction.startConversation}"	
+									styleClass="itemMenuVertical"
+									icon="/images/menus/matriculas.png"
+									style="font-size: 10px; color:red"
+									reRender="mainArea, barArea" />
+									
+					<rich:panelMenuItem label="Acompanhar lotes"
+									action="nogo"	
+									styleClass="itemMenuVertical"
+									icon="/images/menus/matriculas.png"
+									style="font-size: 10px;"
+									reRender="mainArea"	
+									disabled="true" rendered="false"/>
+									
+				</rich:panelMenuGroup>
+				
+				<rich:panelMenuGroup label="Downloads" 
+									 expanded="false"
+									 iconExpanded="/images/menus/downloads.png"		
+									 iconCollapsed="/images/menus/downloads.png"
+									 >
+					<rich:panelMenuItem label="Padrão de CSV"
+									action="#{documentsManagerAction.padraoCsvPdfDownload}"
+									styleClass="itemMenuVertical"
+									icon="/images/menus/pdf.png"
+									style="font-size: 10px; color:red"
+									mode="server"
+									/>
+									
+				</rich:panelMenuGroup>
+				
+			</rich:panelMenu>
+				
+		</rich:panelMenu>
+	</h:panelGroup>
+</ui:composition>

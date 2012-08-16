@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	<h:panelGrid id="form-aplicacao-inputs" columns="2" styleClass="grid"
+		columnClasses="column-label, column-control">
+		<h:outputLabel value="Código: *" for="aplicacao-codigo"
+			rendered="#{aplicacaoDto.id != null}" />
+		<h:outputText id="aplicacao-codigo" value="#{aplicacaoDto.id}"
+			rendered="#{aplicacaoDto.id != null}" />
+
+		<h:outputLabel value="Nome: *" for="aplicacao-nome" />
+		<h:inputText id="aplicacao-nome" value="#{aplicacaoDto.nome}"
+			required="true" requiredMessage="Informe o nome da aplicação."
+			size="50" maxlength="100" />
+
+		<h:outputLabel value="Descrição: *" for="aplicacao-descricao" />
+		<h:inputTextarea id="aplicacao-descricao" value="#{aplicacaoDto.descricao}"
+			rows="5" cols="48"
+			required="true" requiredMessage="Informe a descrição da aplicação.">
+		</h:inputTextarea>
+
+		<h:outputLabel value="Orgão Gestor: *" for="aplicacao-orgao-gestor" />
+		<h:selectOneMenu id="aplicacao-orgao-gestor" value="#{aplicacaoDto.orgao}" 
+			required="true" requiredMessage="É necessário informar o Órgão Gestor da aplicação." >
+			<s:selectItems id="apliacacao-orgao-gestor-item" value="#{orgaosAtivoCA}"
+				var="item" label="#{item.pessoa.sigla}"
+				noSelectionLabel="--- Selecione ---" />
+			<s:convertEntity />
+		</h:selectOneMenu>
+
+		<h:outputLabel value="Contexto: *" for="aplicacao-contexto" />
+		<h:inputText id="aplicacao-contexto" value="#{aplicacaoDto.contexto}"
+			required="true" requiredMessage="Informe o contexto da aplicação."
+			size="50" maxlength="50" />
+
+		<h:outputLabel value="Logo: " for="aplicacao-imagem" />
+		<h:panelGroup id="aplicacao-imagem">
+            <h:panelGroup id="aplicacao-logo-panel">
+				<s:graphicImage id="aplicacao-logo" value="#{aplicacaoDto.logo}" rendered="#{aplicacaoDto.hasLogo()}">
+					<s:transformImageSize height="96" maintainRatio="true" />  
+				</s:graphicImage>
+				<h:graphicImage id="aplicacao-no-logo" value="/images/no-logo.png" rendered="#{!aplicacaoDto.hasLogo()}" />
+			</h:panelGroup>
+			<rich:fileUpload id="aplicacao-file-upload"
+				addControlLabel="#{aplicacaoDto.hasLogo() ? 'Alterar': 'Adicionar'}" 
+				fileUploadListener="#{aplicacaoAction.upload}"
+				maxFilesQuantity="1" immediateUpload="true" allowFlash="false"
+				transferErrorLabel="ERRO: O arquivo excedeu 300 KB ou houve problemas na gravação." 
+				sizeErrorLabel="Arquivo não foi anexado. Tamanho máximo para upload: 300 KB."
+				doneLabel="Arquivo enviado com sucesso."	
+				listHeight="0px" listWidth="30em" locale="pt_BR" >
+				<a4j:support event="onuploadcomplete" reRender="aplicacao-imagem" ajaxSingle="true" 
+					action="#{aplicacaoAction.validarLogo}" />
+			</rich:fileUpload>
+        </h:panelGroup>
+
+		<h:outputLabel value="Situação: *" for="aplicacao-situacao"
+			rendered="#{aplicacaoDto.id != null}" />
+		<h:selectOneRadio id="aplicacao-situacao" value="#{aplicacaoDto.ativo}"
+			layout="lineDirection"
+			required="true" requiredMessage="Informe a situação da aplicação."
+			rendered="#{aplicacaoDto.id != null}">
+			<s:selectItems id="aplicacao-situacao-item" value="#{tiposBoleano}"
+				var="item" label="#{item.situacao}" />
+			<s:convertEnum />
+		</h:selectOneRadio>
+	</h:panelGrid>
+</ui:composition>

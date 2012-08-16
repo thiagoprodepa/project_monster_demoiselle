@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:s="http://jboss.com/products/seam/taglib"
+	xmlns:a4j="https://ajax4jsf.dev.java.net/ajax"
+	xmlns:rich="http://richfaces.ajax4jsf.org/rich"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">Nova Senha</ui:define>
+
+	<ui:define name="caminho">
+		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_magnify.png" />
+		<h:outputText value="Usuário &#187; Nova Senha" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<a4j:form id="form-usuario">
+			<h:panelGrid id="form-usuario-inputs" columns="2" styleClass="grid"
+				columnClasses="column-label, column-control">
+				<h:outputLabel value="Usuário: " for="usuario-nome" />
+				<h:outputText id="usuario-nome" value="#{usuarioDto.nome}" />
+
+				<h:outputLabel value="Nova senha: *" for="usuario-nova-senha" />
+				<h:panelGroup>
+					<h:inputSecret id="usuario-nova-senha" value="#{usuarioAction.novaSenha}"
+						redisplay="true" label="Nova senha" required="true"
+						requiredMessage="É necessário informar a nova senha."
+						size="25" maxlength="50" autocomplete="off">
+						<f:validateLength minimum="6" maximum="20" />
+					</h:inputSecret>
+					<rich:spacer width="6px" />
+					<h:outputText value="(mín. de 6 caracteres)"
+						style="font-style: italic; color:#FF0000; font-size:10px" />
+				</h:panelGroup>
+
+				<h:outputLabel value="Redigite a nova senha: *" for="usuario-redigite-nova-senha" />
+				<h:inputSecret id="usuario-redigite-nova-senha" value="#{usuarioAction.confirmacaoSenha}"
+					label="Confirmação de nova senha" redisplay="true" required="true"
+					requiredMessage="É necessário informar a confirmação da nova senha."
+					size="25" maxlength="50" autocomplete="off">
+					<f:validateLength minimum="6" maximum="20" />
+				</h:inputSecret>
+			</h:panelGrid>
+
+			<hr size="1" />
+			<h:panelGrid columns="2" styleClass="grid"
+				columnClasses="column-label, column-control">
+				<h:outputText value="(*) Campo requerido" />
+				<h:panelGroup style="text-align: right;">
+					<a4j:commandLink id="botao-salvar" styleClass="orange-button"
+						action="#{usuarioAction.resetarSenha}" title="Confirmar nova senha"
+						reRender="form-usuario">
+						<h:graphicImage value="/images/icons/disk.png" />
+						<h:outputText value="Salvar" />
+					</a4j:commandLink>
+				</h:panelGroup>
+			</h:panelGrid>
+
+			<rich:hotKey key="return" selector="#form-usuario-inputs"
+				handler="document.getElementById('form-usuario:botao-salvar').click();" />
+		</a4j:form>
+
+		<script language="JavaScript">
+	       	function formFocus() {
+	       		document.getElementById('form-usuario:usuario-nova-senha').focus();
+			}
+	       	formFocus();
+		</script>
+	</ui:define>
+</ui:composition>

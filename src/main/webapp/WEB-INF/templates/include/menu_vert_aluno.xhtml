@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:s="http://jboss.com/products/seam/taglib">
+
+	<h:panelGroup layout="block" styleClass="menu_vertical">
+	
+		<rich:panelMenu id="menuGestor" mode="ajax" style="width: 98%;"
+			iconExpandedGroup="disc" iconCollapsedGroup="disc"
+			iconExpandedTopGroup="chevronUp"
+			iconCollapsedTopGroup="chevronDown">
+
+			<rich:panelMenuGroup label="Aluno" 
+								 expanded="true"
+								 iconExpanded="../images/ico_inicio.gif"		
+								 iconCollapsed="../images/ico_inicio.gif"> 
+				
+				<rich:panelMenuItem label="Solicitação de Cartão"
+									action="#{protocoloAlunoAction.startConversation}"
+									styleClass="itemMenuVertical"	
+									icon="/images/menus/solicitar_cartao.png"
+									style="font-size: 10px;"
+									reRender="mainArea, barArea" 
+									/>
+									
+				<rich:panelMenuItem label="Acompanhamento de Solicitação"
+									action="#{protocoloAlunoAction.acompanharSolicitacao}"
+									styleClass="itemMenuVertical"	
+									icon="/images/menus/acompanhar_cartao.png"
+									style="font-size: 10px;"
+									reRender="mainArea, barArea"
+									/>					
+				
+				<rich:panelMenuItem label="Imprimir Protocolo"
+									action="#{protocoloAlunoAction.imprimirProtocolo}"
+									styleClass="itemMenuVertical"
+									icon="../images/menus/protocolo.png"
+									style="font-size: 10px; color:red"
+									mode="server" />
+									
+				<rich:panelMenuItem label="Documentos Obrigatórios"
+									action="/docs/docs_obrigatorios_aluno.xhtml"
+									styleClass="itemMenuVertical"
+									icon="../images/ico_required_docs.png"
+									style="font-size: 10px; color:red"
+									mode="server"
+									rendered="false"/>
+						
+			</rich:panelMenuGroup>
+
+		</rich:panelMenu>
+	</h:panelGroup>
+</ui:composition>
