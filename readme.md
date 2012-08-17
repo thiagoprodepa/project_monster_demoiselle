@@ -1,18 +1,19 @@
-# Project Monster ##Demoiselle project stating
+# Project Monster 
+##Demoiselle project stating
 
 This is the classic Seam Booking example ported to Java EE 6 infused with Seam
 3 portable extensions.  It's also been given a fresh new look. See features.txt
 for a list of features that are demonstrated by this example.
 
-##Web app
+##The Web app
 
-##Rest Client
+##The Rest Client
 
-##WebService Client
+##The WebService Client
 
-##Ejb/RMI Client
+##The Ejb/RMI Client
 
-##Swing Client
+##The Swing Client
 
 
 ## Running on JBoss AS 7
