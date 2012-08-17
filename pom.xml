@@ -17,7 +17,7 @@
 
 	<name></name>
 	<description></description>
-	<url></url>
+	<url></url>  
 
 	<properties>
         <!-- Explicitly declaring the source encoding eliminates the following 
@@ -183,18 +183,22 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- <dependency>
+        <!-- 
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <scope>compile</scope>
             <version>4.2.0.Final</version>
-        </dependency> -->
-        <!-- <dependency>
+        </dependency> 
+        -->
+        <!-- 
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <scope>compile</scope>
             <version>1.0.0.GA</version>
-        </dependency> -->
+        </dependency> 
+        -->
         <!-- <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -295,6 +299,17 @@
             <artifactId>jsoup</artifactId>
             <version>1.5.2</version>
         </dependency> -->
+		        
+		        
+		<!--  -->        
+		<!-- Tests -->
+		<!--  -->
+		<dependency>
+		    <groupId>postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    <version>8.4-701.jdbc3</version>
+		    <scope>test</scope>
+		</dependency>        
 		        
 		<!-- Deprecatedss -->
 		<!-- <dependency>

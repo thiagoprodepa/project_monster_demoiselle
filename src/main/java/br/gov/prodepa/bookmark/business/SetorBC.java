@@ -1,5 +1,7 @@
 package br.gov.prodepa.bookmark.business;
 
+import java.util.List;
+
 import br.gov.frameworkdemoiselle.annotation.Startup;
 import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
@@ -22,6 +24,10 @@ public class SetorBC extends JPACrud<Setor, Long> {
 			insert(new Setor("GQ"));
 			insert(new Setor("RAY"));
 		}
+	}
+	
+	public List<Setor> findByExamples(Setor example) {
+		return findByExample(example);
 	}
 	
 }

@@ -2,95 +2,65 @@ package br.gov.prodepa.bookmark.business;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
+import br.gov.prodepa.bookmark.domain.Setor;
 
 @RunWith(DemoiselleRunner.class)
 public class SetorBCTest {
 
-	//@Inject
-	//SetorBC setorBC;
+	@Inject
+	SetorBC setorBC;
 	
 	@Test
 	public void testLoad() {
+		setorBC.load();
+	}
+	
+	@Test
+	public void testLoadID() {
+		Setor setor = setorBC.load(71L);
 		
-		System.out.println("relous");
-		
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testJPACrud() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetBeanClass() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCriteriaBuilder() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetEntityManager() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetPagination() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCreateCriteriaQuery() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCreateQuery() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testHandleException() {
-		fail("Not yet implemented");
+		assertNotNull(setor);
 	}
 
 	@Test
 	public void testInsert() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDelete() {
-		fail("Not yet implemented");
+		setorBC.insert(new Setor("TesteInsert"));
 	}
 
 	@Test
 	public void testUpdate() {
-		fail("Not yet implemented");
+		Setor setor = setorBC.load(71L);
+		
+		setor.setNome("UpdateTeste");
+		
+		setorBC.update(setor);
 	}
-
+	
 	@Test
-	public void testLoadI() {
-		fail("Not yet implemented");
+	public void testDelete() {
+		setorBC.delete(71L);
 	}
 
 	@Test
 	public void testFindAll() {
-		fail("Not yet implemented");
+		List<Setor> setores = setorBC.findAll();
+		
+		System.out.println(setores);
 	}
 
 	@Test
 	public void testFindByExample() {
-		fail("Not yet implemented");
+		List<Setor> setores = setorBC.findByExamples(new Setor("G"));
+		
+		System.out.println(setores);
 	}
 
 }
