@@ -17,6 +17,10 @@
 
 	<modules>
 		<module>monster-web</module>
+		<module>monster-rmi-client</module>
+		<module>monster-ws-client</module>
+		<module>monster-rest-client</module>
+		<module>monster-swing-client</module>
 	</modules>
 
 	<properties>

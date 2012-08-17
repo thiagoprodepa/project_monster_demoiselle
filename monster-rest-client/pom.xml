@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>br.gov.pa.prodepa</groupId>
+		<artifactId>project-monster</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>br.gov.pa.prodepa</groupId>
+	<artifactId>monster-rest-client</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<name>monster-rest-client</name>
+	<description />
+
+	<dependencies>
+		<dependency>
+			<groupId>br.gov.frameworkdemoiselle.sample</groupId>
+			<artifactId>contactlist-core</artifactId>
+			<version>${project.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.miglayout</groupId>
+			<artifactId>miglayout</artifactId>
+			<version>3.7.3.1</version>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+	<repositories>
+		<repository>
+			<id>demoiselle.sourceforge.net</id>
+			<name>Demoiselle Maven Repository</name>
+			<url>http://demoiselle.sourceforge.net/repository/release</url>
+		</repository>
+		<repository>
+			<id>demoiselle.sourceforge.net-snapshot</id>
+			<name>Demoiselle Maven Repository</name>
+			<url>http://demoiselle.sourceforge.net/repository/snapshot</url>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<site>
+			<id>demoiselle.sourceforge.net</id>
+			<url>${htdocs.url}/sample/contactlist/${project.version}/${project.artifactId}</url>
+		</site>
+	</distributionManagement>
+
+	<properties>
+		<htdocs.url>sftp://web.sourceforge.net/home/groups/d/de/demoiselle/htdocs</htdocs.url>
+	</properties>
+</project>
