@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
-
+ 
 	<parent>
 		<groupId>br.gov.frameworkdemoiselle</groupId>
 		<artifactId>demoiselle-jsf-parent</artifactId>
@@ -13,524 +13,209 @@
 	<groupId>br.gov.pa.prodepa</groupId>
 	<artifactId>project-monster</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
-	<name></name>
-	<description></description>
-	<url></url>  
+	<modules>
+		<module>monster-web</module>
+	</modules>
 
 	<properties>
-        <!-- Explicitly declaring the source encoding eliminates the following 
-            message: -->
-        <!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
-            resources, i.e. build is platform dependent! -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Timestamp format for the maven.build.timestamp property -->
-        <!-- You can reference property in pom.xml or filtered resources 
-            (must enable third-party plugin if using Maven < 2.1) -->
-        <maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
-        <!-- Specify the JBoss AS directory to be the JBOSS_HOME environment 
-            variable -->
-        <!-- <jboss.home>${env.JBOSS_HOME}</jboss.home> -->
-        <jboss.home>/opt/as/jboss-6.0.0.Final/</jboss.home>
-        
-        <!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
-            to import. -->
-        <!-- <jboss.bom.version>1.0.0.M10</jboss.bom.version> -->
-        <!-- Alternatively, comment out the above line, and un-comment the 
-            line below to use version 1.0.0.M10-redhat-1 which is a release certified 
-            to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 
-            maven repository. -->
-        <jboss.bom.version>1.0.0.Final</jboss.bom.version>
-        
-        <richfaces.version>4.2.2.Final</richfaces.version>
-        
-    </properties>
-    
-    <dependencyManagement>
-        <dependencies>
-            <!-- JBoss distributes a complete set of Java EE 6 APIs including 
-                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
-                a collection) of artifacts. We use this here so that we always get the correct 
-                versions of artifacts. Here we use the jboss-javaee-6.0-with-tools stack 
-                (you can read this as the JBoss stack of the Java EE 6 APIs, with some extras 
-                tools for your project, such as Arquillian for testing), the jboss-javaee-6.0-with-hibernate 
-                stack (you can read this as the JBoss stack of the Java EE 6 APIs, with extras 
-                from the Hibernate family of projects) and the jboss-javaee-6.0-with-errai
-                stack (you can read this as the JBoss stack of the Java EE 6 APIs, with support for Errai) -->
-            <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-javaee-6.0-with-tools</artifactId>
-                <version>${jboss.bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            <!-- <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
-                <version>${jboss.bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency> 
-            <dependency>
-                <groupId>org.jboss.bom</groupId>
-                <artifactId>jboss-javaee-6.0-with-errai</artifactId>
-                <version>${jboss.bom.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-            -->
-        </dependencies>
-    </dependencyManagement>
-
-	<dependencies>
-		<dependency>
-			<groupId>br.gov.frameworkdemoiselle</groupId>
-			<artifactId>demoiselle-jpa</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-		    <groupId>br.gov.frameworkdemoiselle</groupId>
-		    <artifactId>demoiselle-jta</artifactId>
-		    <scope>compile</scope>
-		</dependency>
-
-	<!-- 
-		<dependency>
-			<groupId>org.powermock</groupId>
-			<artifactId>powermock-api-easymock</artifactId>
-			<scope>test</scope>
-		</dependency>
-	 -->		
+		<!-- Explicitly declaring the source encoding eliminates the following 
+		    message: -->
+		<!-- [WARNING] Using platform encoding (UTF-8 actually) to copy filtered 
+		    resources, i.e. build is platform dependent! -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- Timestamp format for the maven.build.timestamp property -->
+		<!-- You can reference property in pom.xml or filtered resources 
+		    (must enable third-party plugin if using Maven < 2.1) -->
+		<maven.build.timestamp.format>yyyyMMdd'T'HHmmss</maven.build.timestamp.format>
+		<!-- Specify the JBoss AS directory to be the JBOSS_HOME environment 
+		    variable -->
+		<!-- <jboss.home>${env.JBOSS_HOME}</jboss.home> -->
+		<jboss.home>/opt/as/jboss-6.0.0.Final/</jboss.home>
 		
-		<!--  -->
-		<!-- TicketMoster -->
-        <!--  -->
-		<!-- Import the EJB API, we use provided scope as the API is included 
-            in JBoss AS 7 
-            -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.ejb</groupId>
-            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
+		<!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
+		    to import. -->
+		<!-- <jboss.bom.version>1.0.0.M10</jboss.bom.version> -->
+		<!-- Alternatively, comment out the above line, and un-comment the 
+		    line below to use version 1.0.0.M10-redhat-1 which is a release certified 
+		    to work with JBoss EAP 6. It requires you have access to the JBoss EAP 6 
+		    maven repository. -->
+		<jboss.bom.version>1.0.0.Final</jboss.bom.version>
+		
+		<richfaces.version>4.2.2.Final</richfaces.version>
 
-        <!-- Import the JAX-RS API, we use provided scope as the API is included 
-            in JBoss AS 7 
-            -->
-        <dependency>
-            <groupId>org.jboss.spec.javax.ws.rs</groupId>
-            <artifactId>jboss-jaxrs-api_1.1_spec</artifactId>
-            <scope>provided</scope>
-        </dependency>
+		<!--
+		<appName>Photoalbum Demo Application</appName>
+		<projectName>photoalbum</projectName>
+		<richfacesVersion>${project.version}</richfacesVersion>
+		<seamVersion>2.1.1.GA</seamVersion>
+		<faceletsVersion>1.1.15.B1</faceletsVersion>
+		<jbosscontext>default</jbosscontext>
+		<imageset>short</imageset>
+		<imagespath>short</imagespath>
+		<environment.properties>environment/dev</environment.properties>
+		<environment.debug>true</environment.debug>
+		<environment.facelets.REFRESH_PERIOD>2</environment.facelets.REFRESH_PERIOD>
+		-->
+		
+	    </properties>
 
-        <!-- Import the JPA API, we use provided scope as the API is included 
-            in JBoss AS 7 
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-            -->
-        
-        <!--  -->
-        <!-- RichiFaces -->
-        <!--  -->
-        <dependency>
-            <groupId>org.richfaces.core</groupId>
-            <artifactId>richfaces-core-impl</artifactId>
-            <version>4.2.2.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-components-api</artifactId>
-            <version>4.2.2.Final</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.richfaces.ui</groupId>
-            <artifactId>richfaces-components-ui</artifactId>
-            <version>4.2.2.Final</version>
-            <scope>compile</scope>
-        </dependency>
-		<dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp</groupId>
-            <artifactId>jsp-api</artifactId>
-            <scope>provided</scope>
-            <version>2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>el-api</artifactId>
-            <scope>provided</scope>
-            <!-- <version>1.0</version> -->
-        </dependency>
-        <dependency>
-            <groupId>javax.servlet.jsp.jstl</groupId>
-            <artifactId>jstl-api</artifactId>
-            <scope>compile</scope>
-            <version>1.2</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>servlet-api</artifactId>
-                    <groupId>javax.servlet</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- 
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <scope>compile</scope>
-            <version>4.2.0.Final</version>
-        </dependency> 
-        -->
-        <!-- 
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
-            <scope>compile</scope>
-            <version>1.0.0.GA</version>
-        </dependency> 
-        -->
-        <!-- <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            API and Impl bundled in weld-servlet
-            <scope>provided</scope>
-            <version>1.6.1</version>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>net.sf.ehcache</groupId>
-            <artifactId>ehcache</artifactId>
-            <version>1.6.0</version>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>org.hsqldb</groupId>
-            <artifactId>hsqldb-j5</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency> -->
-        <!-- <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <scope>compile</scope>
-            <version>4.0.0.Final</version>
-        </dependency> -->
-
-        <!-- Dependencies for Push and JMS -->
-        <!-- 
-        <dependency>
-            <groupId>org.atmosphere</groupId>
-            <artifactId>atmosphere-runtime</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>javax.jms</groupId>
-            <artifactId>jms-api</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hornetq</groupId>
-            <artifactId>hornetq-core</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hornetq</groupId>
-            <artifactId>hornetq-jms</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.hornetq</groupId>
-            <artifactId>hornetq-logging</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.netty</groupId>
-            <artifactId>netty</artifactId>
-            <scope>${dependency.scope}</scope>
-        </dependency>
-         -->
-        
-        <!-- Dependencies for CDI -->
-        <!-- 
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>compile</scope>
-            <version>1.0-SP4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.jboss.weld.servlet</groupId>
-            <artifactId>weld-servlet</artifactId>
-            <scope>compile</scope>
-            <version>1.1.4.Final</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.jboss.weld</groupId>
-                    <artifactId>weld-build-config</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency> -->
-
-        <!-- The rewrite library allows us to do url rewriting - used here for rewriting mobile devices to mobile specific views -->
-        <!-- 
-        <dependency>
-            <groupId>org.ocpsoft.rewrite</groupId>
-            <artifactId>rewrite-servlet</artifactId>
-        </dependency>
-         -->
-        
-        <!-- JBoss AS7 management 
-        <dependency>
-            <groupId>org.jboss.as</groupId>
-            <artifactId>jboss-as-controller-client</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        -->
-        
-        <!-- Jsoup used for validation of safe html input -->
-        <!-- <dependency>
-            <groupId>org.jsoup</groupId>
-            <artifactId>jsoup</artifactId>
-            <version>1.5.2</version>
-        </dependency> -->
-		        
-		        
-		<!--  -->        
-		<!-- Tests -->
-		<!--  -->
-		<dependency>
-		    <groupId>postgresql</groupId>
-		    <artifactId>postgresql</artifactId>
-		    <version>8.4-701.jdbc3</version>
-		    <scope>test</scope>
-		</dependency>        
-		        
-		<!-- Deprecatedss -->
-		<!-- <dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<scope>compile</scope>
-		</dependency> -->
-	</dependencies>
-
+	<dependencyManagement>
+		<dependencies>
+		    <!-- JBoss distributes a complete set of Java EE 6 APIs including 
+		        a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
+		        a collection) of artifacts. We use this here so that we always get the correct 
+		        versions of artifacts. Here we use the jboss-javaee-6.0-with-tools stack 
+		        (you can read this as the JBoss stack of the Java EE 6 APIs, with some extras 
+		        tools for your project, such as Arquillian for testing), the jboss-javaee-6.0-with-hibernate 
+		        stack (you can read this as the JBoss stack of the Java EE 6 APIs, with extras 
+		        from the Hibernate family of projects) and the jboss-javaee-6.0-with-errai
+		        stack (you can read this as the JBoss stack of the Java EE 6 APIs, with support for Errai) -->
+		    <dependency>
+		        <groupId>org.jboss.bom</groupId>
+		        <artifactId>jboss-javaee-6.0-with-tools</artifactId>
+		        <version>${jboss.bom.version}</version>
+		        <type>pom</type>
+		        <scope>import</scope>
+		    </dependency>
+		    <!-- <dependency>
+		        <groupId>org.jboss.bom</groupId>
+		        <artifactId>jboss-javaee-6.0-with-hibernate</artifactId>
+		        <version>${jboss.bom.version}</version>
+		        <type>pom</type>
+		        <scope>import</scope>
+		    </dependency> 
+		    <dependency>
+		        <groupId>org.jboss.bom</groupId>
+		        <artifactId>jboss-javaee-6.0-with-errai</artifactId>
+		        <version>${jboss.bom.version}</version>
+		        <type>pom</type>
+		        <scope>import</scope>
+		    </dependency>
+		    -->
+		</dependencies>
+	    </dependencyManagement>
+<!--
+        <distributionManagement>
+		<downloadUrl>
+			http://labs.jboss.com/portal/jbossrichfaces/downloads
+		</downloadUrl>
+		<repository>
+			<id>repository.jboss.org</id>
+			<uniqueVersion>false</uniqueVersion>
+			<url>${releaseRepository}</url>
+		</repository>
+		<snapshotRepository>
+			<id>snapshots.jboss.org</id>
+			<uniqueVersion>true</uniqueVersion>
+			<url>${snapshotRepository}</url>
+		</snapshotRepository>
+	</distributionManagement>
+-->
 	<repositories>
 		<repository>
+			<id>repository.jboss.org</id>
+			<name>Jboss Repository for Maven</name>
+			<url>http://repository.jboss.org/maven2/</url>
+		</repository>
+		<repository>
+			<id>snapshots.jboss.org</id>
+			<name>Jboss Snapshots Repository for Maven</name>
+			<url>http://snapshots.jboss.org/maven2/</url>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+		<repository>
 			<id>demoiselle.sourceforge.net-release</id>
+			<name>Demoiselle Repository for Maven (Also Snapshots)</name>
 			<url>http://demoiselle.sourceforge.net/repository/release</url>
+			<snapshots><enabled>true</enabled></snapshots>
 		</repository>
 	</repositories>
 	
+<!--
 	<build>
-        <!-- Maven will append the version to the finalName (which is the
-       name given to the generated war, and hence the context root) -->
-        <finalName>${project.artifactId}</finalName>
-        <pluginManagement>
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-webdav</artifactId>
+				<version>1.0-beta-2</version>
+			</extension>
+		</extensions>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ejb-plugin</artifactId>
+				<configuration>
+					<ejbVersion>3.0</ejbVersion>
+				</configuration>
+			</plugin>
+		</plugins>
 
-            <plugins>
-                <!-- Compiler plugin enforces Java 1.6 compatibility and activates
-              annotation processors -->
-                <plugin>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.1</version>
-                    <configuration>
-                        <source>1.6</source>
-                        <target>1.6</target>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>2.1.1</version>
-                    <configuration>
-                        <!-- We must exclude GWT client local classes from the
-                   deployment, or classpath scanners such as Hibernate and Weld get confused
-                   when the webapp is bootstrapping. -->
-                        <packagingExcludes>**/javax/**/*.*,**/client/local/**/*.class</packagingExcludes>
-                        <archive>
-                            <manifestEntries>
-                                <Dependencies>org.jboss.as.naming,org.jboss.as.server,org.jboss.msc</Dependencies>
-                            </manifestEntries>
-                        </archive>
-                    </configuration>
-                </plugin>
-
-                <!-- The JBoss AS plugin deploys your war to a local JBoss AS container -->
-                <!-- To use run: mvn package jboss-as:deploy 
-                <plugin>
-                    <groupId>org.jboss.as.plugins</groupId>
-                    <artifactId>jboss-as-maven-plugin</artifactId>
-                    <version>7.1.1.Final</version>
-                </plugin>
-                -->
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>2.4.1</version>
-                    <configuration>
-                        <filesets>
-                            <fileset>
-                                <directory>.errai</directory>
-                                <includes>
-                                    <include>**</include>
-                                </includes>
-                            </fileset>
-                        </filesets>
-                    </configuration>
-                </plugin>
-                <!-- m2e (Maven integration for Eclipse) requires the following
-                    configuration -->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>org.codehaus.mojo</groupId>
-                                        <artifactId>gwt-maven-plugin</artifactId>
-                                        <versionRange>[2.3.0,)</versionRange>
-                                        <goals>
-                                            <goal>resources</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <execute/>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-        <!-- <plugins>
-            GWT plugin to compile client-side java code to javascript
-            and to run GWT development mode
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>gwt-maven-plugin</artifactId>
-                <version>2.4.0</version>
-                <configuration>
-                    <inplace>true</inplace>
-                    <logLevel>INFO</logLevel>
-                    <extraJvmArgs>-Xmx512m</extraJvmArgs>
-                    <draftCompile>true</draftCompile>
-                    Configure GWT's development mode (formerly known
-                    as hosted mode) to not start the default server (embedded jetty), but to
-                    download the HTML host page from the configured runTarget.
-                    <noServer>true</noServer>
-                    <runTarget>http://localhost:8080/ticket-monster/booking-monitor.html</runTarget>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>resources</goal>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>gwt-clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin> 
-        </plugins>-->
-    </build>
-
-    <profiles>
-        <profile>
-            <!-- The default profile skips all tests, though you can tune 
-                it to run just unit tests based on a custom pattern -->
-            <!-- Seperate profiles are provided for running all tests, including 
-                Arquillian tests that execute in the specified container -->
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <!-- An optional Arquillian testing profile that executes tests 
-                in your JBoss AS instance -->
-            <!-- This profile will start a new JBoss AS instance, and execute 
-                the test, shutting it down when done -->
-            <!-- Run with: mvn clean test -Parq-jbossas-managed -->
-            <id>arq-jbossas-managed</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-managed</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <!-- An optional Arquillian testing profile that executes tests 
-                in a remote JBoss AS instance -->
-            <!-- Run with: mvn clean test -Parq-jbossas-remote -->
-            <id>arq-jbossas-remote</id>
-            <dependencies>
-                <dependency>
-                    <groupId>org.jboss.as</groupId>
-                    <artifactId>jboss-as-arquillian-container-remote</artifactId>
-                    <scope>test</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <!-- An optional profile that -->
-            <id>postgresql-openshift</id>
-            <build>
-                <resources>
-                    <resource>
-                        <directory>src/main/resources-postgresql-openshift</directory>
-                    </resource>
-                    <resource>
-                        <directory>src/main/resources</directory>
-                        <includes>
-                            <include>**/*</include>
-                        </includes>
-                        <excludes>
-                            <exclude>META-INF/*</exclude>
-                        </excludes>
-                    </resource>
-                </resources>
-                <plugins>
-                    <plugin>
-                        <artifactId>maven-surefire-plugin</artifactId>
-                        <version>2.4.3</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-    </profiles>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<downloadSources>true</downloadSources>
+						<downloadJavadocs>false</downloadJavadocs>
+						<projectNameTemplate>[artifactId]-[version]
+						</projectNameTemplate>
+						<wtpmanifest>true</wtpmanifest>
+						<wtpapplicationxml>true</wtpapplicationxml>
+						<wtpversion>2.0</wtpversion>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.5</source>
+						<target>1.5</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<configuration>
+						<skip>true</skip>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 	
+	<profiles>
+		<profile>
+			<id>short</id>
+			<properties>
+				<imageset>short</imageset>
+				<imagespath>short</imagespath>
+				<environment.properties>environment/dev</environment.properties>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>full</id>
+			<properties>
+				<imageset>full</imageset>
+				<imagespath>full</imagespath>
+				<environment.properties>environment/dev</environment.properties>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>livedemo</id>
+			<properties>
+				<imageset>full</imageset>
+				<imagespath>full</imagespath>
+				<environment.properties>environment/prod</environment.properties>
+				<environment.debug>false</environment.debug>
+				<environment.facelets.REFRESH_PERIOD>-1</environment.facelets.REFRESH_PERIOD>
+			</properties>
+		</profile>
+	</profiles>
+-->
 </project>
