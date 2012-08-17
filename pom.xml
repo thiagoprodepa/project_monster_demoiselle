@@ -21,6 +21,8 @@
 		<module>monster-ws-client</module>
 		<module>monster-rest-client</module>
 		<module>monster-swing-client</module>
+		<!-- 
+		 -->
 	</modules>
 
 	<properties>
@@ -37,6 +39,7 @@
 		    variable -->
 		<!-- <jboss.home>${env.JBOSS_HOME}</jboss.home> -->
 		<jboss.home>/opt/as/jboss-6.0.0.Final/</jboss.home>
+		<jboss.configuraction>default</jboss.configuraction>
 		
 		<!-- Define the version of JBoss' Java EE 6 APIs and Tools we want 
 		    to import. -->

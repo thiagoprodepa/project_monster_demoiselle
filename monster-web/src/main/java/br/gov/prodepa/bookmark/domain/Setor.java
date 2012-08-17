@@ -2,6 +2,7 @@ package br.gov.prodepa.bookmark.domain;
 
 import java.io.Serializable;
 
+import javax.inject.Named;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
+@Named
 @Entity
 @Table(name = "setor", uniqueConstraints = @UniqueConstraint(columnNames = {"nome"}))
 public class Setor implements Serializable {

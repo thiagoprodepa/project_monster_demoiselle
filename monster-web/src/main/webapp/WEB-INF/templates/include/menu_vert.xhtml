@@ -5,8 +5,7 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:rich="http://richfaces.org/rich"
-	>
+	xmlns:rich="http://richfaces.org/rich">
 
 	<h:panelGroup layout="block" styleClass="menu_vertical"	>
 		<h:outputText value="Um login vai bem" />
@@ -33,14 +32,15 @@
 		</h:form>
 		
 	</h:panelGroup>
-	<h:form id="form">
 	<h:panelGroup layout="block" styleClass="menu_vertical"	>
 	
-	<rich:panelMenu style="width:155px" itemMode="ajax" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
+	<h:form id="menuForm">
+	<rich:panelMenu style="width:155px" 
+	                itemMode="server" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
                 groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
                 topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" >
                 
-                <rich:panelMenuGroup label="Manters">
+                <rich:panelMenuGroup label="Manters" expanded="true">
                 
                     <rich:panelMenuItem label="Projetos"
 									action="#{planoCadastralAction.startConversation}"
@@ -63,8 +63,8 @@
 									style="font-size: 10px; color:red"
 									reRender="mainArea, barArea" />
 													
-				   <rich:panelMenuItem label="Setores"
-									action="#{planoCadastralAction.startConversation}"
+				   <rich:panelMenuItem label="Setores"  
+									action="/private/setor/list.jsf"
 									styleClass="itemMenuVertical"
 									icon="/images/menus/planos_cadastrais.png"
 									style="font-size: 10px; color:red"
@@ -74,7 +74,7 @@
                 
      </rich:panelMenu>           
 		
-	</h:panelGroup>
 	</h:form>
+	</h:panelGroup>
 	
 </ui:composition>

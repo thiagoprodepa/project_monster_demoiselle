@@ -4,23 +4,15 @@
 <!--
 Template principal com menu na horizontal, vertical e corpo.
 -->
-<f:view contentType="text/html"
-        xmlns="http://www.w3.org/1999/xhtml"
-        xmlns:ui="http://java.sun.com/jsf/facelets"
-        xmlns:h="http://java.sun.com/jsf/html"
-        xmlns:f="http://java.sun.com/jsf/core"
-        xmlns:a4j="http://richfaces.org/a4j"
-        xmlns:s="http://jboss.com/products/seam/taglib"
-        xmlns:rich="http://richfaces.org/rich"
-        >
-
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:s="http://jboss.com/products/seam/taglib" 
       xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich"
       xml:lang="pt_BR" lang="pt_BR">
+
+<f:view>
        
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -112,17 +104,15 @@ Template principal com menu na horizontal, vertical e corpo.
 		<h:panelGroup>
 			<!-- Conteudo da Pagina -->
 			<div id="cont2" class="ft2">
-              <s:validateAll>
 				<ui:insert name="mensagem">
 					<ui:include src="include/mensagem.xhtml" rendered="#{not empty facesMessages.currentMessages}"/>
 				</ui:insert>	
 				<ui:insert name="pesquisa"/>
-				<ui:insert name="conteudo1"/>
+				<ui:insert name="conteudo"/>
 				<br />
 				<ui:insert name="conteudo2"/>
 				<br />
 				<ui:insert name="conteudo3"/>
-              </s:validateAll>
 			</div>
 		</h:panelGroup>
 		
@@ -148,5 +138,5 @@ Template principal com menu na horizontal, vertical e corpo.
                 query="keyfilter(/[a-z0-9_\.\-@]/i);" timing="domready"/>
 	
 </h:body>
-</html>
 </f:view>
+</html>

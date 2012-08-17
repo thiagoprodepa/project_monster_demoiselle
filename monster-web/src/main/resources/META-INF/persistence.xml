@@ -5,8 +5,9 @@
 	<!-- If you are using jboss6 with non JTA transaction then use this persistence-unit -->
 	<!--
 	-->
-	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
-		<non-jta-data-source>java:/DefaultDS</non-jta-data-source>
+	<persistence-unit name="bookmark-ds" transaction-type="JTA">
+		<jta-data-source>java:/projectMonsterDS</jta-data-source>
+		
 		<class>br.gov.prodepa.bookmark.domain.Bookmark</class>
 		
 		<class>br.gov.prodepa.bookmark.domain.Setor</class>
@@ -14,9 +15,13 @@
 		<class>br.gov.prodepa.bookmark.domain.Usuario</class>
 
 		<properties>
+			
+			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="false" />
-			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+
+			<!-- <property name="hibernate.transaction.factory_class" value="org.hibernate.transaction.JTATransactionFactory"/> -->
 			<property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.JBossTransactionManagerLookup" />
 		</properties>
 	</persistence-unit>

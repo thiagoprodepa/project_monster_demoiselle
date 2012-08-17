@@ -8,21 +8,13 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>br.gov.pa.prodepa</groupId>
-	<artifactId>monster-swing-client</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>monster-ws-client</artifactId>
 	<packaging>jar</packaging>
 
 	<name>monster-ws-client</name>
 	<description />
 
 	<dependencies>
-		<dependency>
-			<groupId>br.gov.frameworkdemoiselle.sample</groupId>
-			<artifactId>contactlist-core</artifactId>
-			<version>${project.version}</version>
-			<scope>compile</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>

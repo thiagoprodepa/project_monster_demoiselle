@@ -5,7 +5,6 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:rich="http://richfaces.org/rich"> 
 
 	<div class="linha_horizontal" />
@@ -15,7 +14,7 @@
 			<div id="caminho_naveg" style="font-weight: bold; width:60%">
 				<strong>Estou em: </strong>
 				<span>
-					<s:link action="/seguranca/principal/principal.seam"> <h:graphicImage value="/images/home.png" style="border:0" /> </s:link>
+					<h:link action="/private/setor/list.jsf"> <h:graphicImage value="/images/home.png" style="border:0" /> </h:link>
 					<h:outputText value=" > "/>
 				</span>
 			</div>

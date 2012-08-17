@@ -8,19 +8,18 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>br.gov.pa.prodepa</groupId>
 	<artifactId>monster-swing-client</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>monster-swing-client</name>
 	<description />
 
 	<dependencies>
+	
 		<dependency>
-			<groupId>br.gov.frameworkdemoiselle.sample</groupId>
-			<artifactId>contactlist-core</artifactId>
-			<version>${project.version}</version>
+			<groupId>br.gov.pa.prodepa</groupId>
+			<artifactId>monster-web</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>

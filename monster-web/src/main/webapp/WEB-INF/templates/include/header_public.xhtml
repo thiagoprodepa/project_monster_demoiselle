@@ -8,7 +8,6 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a4j="http://richfaces.org/a4j"
-      xmlns:s="http://jboss.com/products/seam/taglib"
       xmlns:richx="http://richfaces.org/richx"
       xmlns:rich="http://richfaces.org/rich">
 	
@@ -45,13 +44,14 @@
             
             <a4j:status onstart="Richfaces.showModalPanel('ajaxLoadingModalBox',{width:100, top:200})"  
             			onstop="Richfaces.hideModalPanel('ajaxLoadingModalBox')" />
-            <rich:modalPanel id="ajaxLoadingModalBox" height="95" width="95" 
-            				 zindex="2000" style="text-align: center;" 
+            <rich:popupPanel id="ajaxLoadingModalBox" height="95" width="95" 
+            				 zindex="2000" modal="true" 
+            				 style="text-align: center;" 
             				 resizeable="false" headerClass="header_processando_panel">
                     <h:outputText value="Processando..." style="width:100%; float:left;" />
                 	<h:graphicImage value="/images/loadinfo_clock.gif" 
                 					border="0" height="50" width="50"  style="text-align: center;" />
-            </rich:modalPanel>
+            </rich:popupPanel>
             
 		</div>
 

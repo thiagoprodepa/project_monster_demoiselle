@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/default.xhtml">
+	
+	<ui:define name="titulo">Pesquisa de Usuário</ui:define>
+
+	<ui:define name="caminho">
+		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_magnify.png" />
+		<h:outputText value="Setor &#187; Pesquisa" />
+	</ui:define>
+	
+	<ui:define name="conteudo">
+		<!-- Resultado da pesquisa -->
+		<h:form id="form-lista-perfil">
+			<h:panelGrid styleClass="gridPanel">
+				<h:panelGroup rendered="#{empty setorListMB.resultList}">
+					<h:outputText value="Nenhum resultado encontrado." />
+				</h:panelGroup>
+				
+				<rich:dataTable id="usuarios" var="u" value="#{setorListMB.resultList}" 
+					            rows="10" rowKeyVar="indice" cellpadding="0" cellspacing="0"
+					            styleClass="gridPanel" border="0" rendered="#{not empty setorListMB.resultList}">
+					
+					<rich:column id="column-indice" styleClass="iconColumn">
+						<f:facet name="header" />
+						<h:outputText value="#{(indice + 1)}"/>
+					</rich:column>
+					
+					<rich:column id="column-login" styleClass="iconColumn">
+						<f:facet name="header">
+							<h:outputText value="ID" />
+						</f:facet>
+						<h:outputText value="#{u.id}" />
+					</rich:column>
+
+					<rich:column id="column-nome" style="text-align: left;"	sortBy="#{u.nome}" width="200px">
+						<f:facet name="header">
+							<h:outputText value="Nome" />
+						</f:facet>
+						<h:outputText value="#{u.nome}" />
+					</rich:column>
+					
+					<rich:column styleClass="iconColumn">
+						<f:facet name="header">Edit</f:facet>
+						<h:commandLink action="#{setorListMB.getNextView}" actionListener="#{setorListMB.clear}">
+							<h:graphicImage value="../../images/ico_manter_lote.gif" style="border:0px" />
+							<f:param name="id" value="#{u.id}" />
+						</h:commandLink>
+					</rich:column>
+					 
+					<h:column styleClass="iconColumn"> 
+						<f:facet name="header"> 
+							<h:outputText value=""/> 
+						</f:facet> 
+						<a4j:commandLink action="#{loteAction.toPanelActions}" title="Painel de ações do lote"> 
+							<h:graphicImage value="../../images/ico_manter_lote.gif" style="border:0px" /> 
+						</a4j:commandLink> 
+					</h:column>  
+					
+					<h:column styleClass="iconColumn"> 
+						<f:facet name="header"> 
+							<h:outputText value=""/> 
+						</f:facet> 
+						<a4j:commandLink action="#{loteAction.selecionar}"  view="/aluno/lote/lote_update.xhtml" title="Alterar Lote">
+							<h:graphicImage value="../../images/pencil.png" style="border:0px" /> 
+						</a4j:commandLink> 
+					</h:column>
+
+					<f:facet name="footer">
+						<rich:dataScroller id="paginador" for="usuarios" maxPages="10"
+							stepControls="hide" renderIfSinglePage="false" />
+					</f:facet>
+				</rich:dataTable>
+			</h:panelGrid>
+		</h:form>
+		
+		<rich:popupPanel id="usuario-modal-panel" modal="true" autosized="true" resizeable="false" minWidth="450" minHeight="150" moveable="false">
+	        <f:facet name="header">
+	            <h:outputText value="Setor" />
+	        </f:facet>
+	        <f:facet name="controls">
+	            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('usuario-modal-panel')}.hide(); return false;">
+	                X
+	            </h:outputLink>
+	        </f:facet>
+	        
+	        <h:form>
+            	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
+					<h:panelGrid columns="2" styleClass="grid"
+						columnClasses="column-label, column-control">
+						
+						<h:outputLabel value="Chave: " for="usuario-chave" />
+						<h:outputText id="usuario-chave" value="#{usuarioDto.id}" />
+						
+						<h:outputLabel value="Nome: " for="usuario-nome" />
+						<h:outputText id="usuario-nome" value="#{usuarioDto.nome}" />
+						
+						<h:outputLabel value="Login: " for="usuario-login" />
+						<h:outputText id="usuario-login" value="#{usuarioDto.login}" />
+						
+						<h:outputLabel value="Órgão: " for="usuario-orgao" />
+						<h:outputText id="usuario-orgao" value="#{usuarioDto.orgao.pessoa.nome}" />
+						
+						<h:outputLabel value="Situação: " for="usuario-situacao" />
+						<h:outputText id="usuario-situacao" value="#{usuarioDto.situacao.descricao}" />
+					</h:panelGrid>
+				</h:panelGroup>
+				
+				<hr size="1" />
+				<h:panelGrid columns="2" styleClass="grid"
+					columnClasses="column-label, column-control">
+					<h:panelGroup style="text-align: right;">
+						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
+							onclick="#{rich:component('usuario-modal-panel')}.hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+			</h:form>
+	    </rich:popupPanel>
+
+	</ui:define>
+</ui:composition>

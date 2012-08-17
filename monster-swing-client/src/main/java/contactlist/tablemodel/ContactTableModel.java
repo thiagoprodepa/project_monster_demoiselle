@@ -42,32 +42,32 @@ import java.util.ResourceBundle;
 
 import javax.swing.table.AbstractTableModel;
 
-import contactlist.domain.Contact;
+import br.gov.prodepa.bookmark.domain.Setor;
 
 public class ContactTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Contact> list;
+	private List<Setor> list;
 	
 	private ResourceBundle bundle;
 	
 	public ContactTableModel(ResourceBundle bundle) {
 		this.bundle = bundle;
-		this.list = new ArrayList<Contact>();
+		this.list = new ArrayList<Setor>();
 	}
 
-	public ContactTableModel(List<Contact> list, ResourceBundle bundle) {
+	public ContactTableModel(List<Setor> list, ResourceBundle bundle) {
 		this.bundle = bundle;
 		this.list = list;
 	}
 
-	public void add(Contact contact) {
+	public void add(Setor contact) {
 		list.add(contact);
 		fireTableRowsInserted(list.size() - 1, list.size() - 1);
 	}
 
-	public Contact get(int row) {
+	public Setor get(int row) {
 		return list.get(row);
 	}
 
@@ -97,12 +97,12 @@ public class ContactTableModel extends AbstractTableModel {
 
 	@Override
 	public Object getValueAt(int row, int column) {
-		Contact contact = get(row);
+		Setor contact = get(row);
 		switch (column) {
 			case 0:
-				return contact.getName();
+				return contact.getId();
 			case 1:
-				return contact.getCpf();
+				return contact.getNome();
 			case 2:
 				return "12312321";
 			default:

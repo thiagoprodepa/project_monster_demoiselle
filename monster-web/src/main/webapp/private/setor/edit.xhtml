@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:rich="http://richfaces.org/rich"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="titulo">
+		<h:outputText value="Alteração de Usuário" />
+	</ui:define>
+
+	<ui:define name="caminho">
+		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_edit.png" />
+		<h:outputText value="Usuário &#187; Alteração" />
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="form-usuario">
+			
+
+			<h:outputText value="#{setorEditMB.bean.id}" />
+			
+			
+			<h:panelGrid columns="2" columnClasses="cl12Label, cl80_view" width="100%" > 
+	
+				<h:outputText value="id" />
+				<h:outputText id="id" value="#{setorEditMB.bean.id}" />
+			
+				<h:outputText value="nome" />
+				<h:inputText value="#{setorEditMB.bean.nome}" />							 
+							 
+			</h:panelGrid>
+
+		
+			<hr size="1" />
+			<h:panelGrid columns="2" styleClass="grid" columnClasses="column-label, column-control">
+				
+				<h:outputText value="(*) Campo requerido" />
+				
+				<h:panelGroup style="text-align: right;">
+				
+					<a4j:commandLink id="botao-insert" 
+						  		     action="#{setorEditMB.insert}"
+						  		     rendered="#{!setorEditMB.updateMode}" 
+						  		     title="Confirmar inserção"
+						             reRender="form-usuario"
+						             styleClass="orange-button">
+						<h:graphicImage value="/images/disk.png" />
+						<h:outputText value="Salvar" />
+					</a4j:commandLink>
+					
+					<a4j:commandLink id="botao-update" 
+						  		     action="#{setorEditMB.update}"
+						  		     rendered="#{setorEditMB.updateMode}" 
+						  		     title="Confirmar alteração"
+						             reRender="form-usuario"
+						             styleClass="orange-button">
+						<h:graphicImage value="/images/disk.png" />
+						<h:outputText value="Salvar" />
+					</a4j:commandLink>
+					
+					<a4j:commandLink id="botao-voltar"
+									 action="#{setorListMB.getPreviousView}"
+									 title="Voltar para pesquisa"
+									 styleClass="secondary-button"
+									 >
+						<h:graphicImage value="/images/arrow_undo.png" />
+						<h:outputText value="Voltar" />
+					</a4j:commandLink>
+				</h:panelGroup>
+				
+			</h:panelGrid>
+		<rich:hotKey key="return" selector="#form-usuario-inputs"
+				handler="document.getElementById('form-usuario:botao-salvar').click();" />
+		</h:form>
+		
+	</ui:define>
+</ui:composition>

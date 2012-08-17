@@ -7,6 +7,7 @@ import br.gov.frameworkdemoiselle.stereotype.BusinessController;
 import br.gov.frameworkdemoiselle.template.JPACrud;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.bookmark.dto.search.CommonSearchsDto;
 
 @BusinessController
 public class SetorBC extends JPACrud<Setor, Long> {
@@ -26,8 +27,10 @@ public class SetorBC extends JPACrud<Setor, Long> {
 		}
 	}
 	
-	public List<Setor> findByExamples(Setor example) {
-		return findByExample(example);
+	public List<Setor> findByExamples(CommonSearchsDto example) {
+		
+		//TODO PROBLEM Esse metodo findByExample devera receber um param diferente do declarado na classe para suportar esse caso.
+		return findByExample(new Setor(example.getPattern()));
 	}
 	
 }

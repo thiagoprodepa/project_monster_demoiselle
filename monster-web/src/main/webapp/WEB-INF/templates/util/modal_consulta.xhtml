@@ -5,12 +5,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:a4j="http://richfaces.org/a4j"
-	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:rich="http://richfaces.org/rich">
 	
 	<h:form id="clearConv">
-		<rich:modalPanel id="mp_default" height="240" width="470" zindex="2000"  overlapEmbedObjects="true">
+		<rich:popupPanel id="mp_default" height="240" width="470" zindex="2000"  
+						 modal="true" overlapEmbedObjects="true">
 		
 			<f:facet name="header">
 				<ui:insert name="header"/>
@@ -28,6 +28,6 @@
 	
 			</h:panelGrid>
 	
-		</rich:modalPanel>
+		</rich:popupPanel>
 	</h:form>
 </ui:composition>

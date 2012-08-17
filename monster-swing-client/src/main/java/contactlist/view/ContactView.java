@@ -48,10 +48,8 @@ import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.Strings;
-import br.gov.frameworkdemoiselle.validation.annotation.Validate;
-import contactlist.business.ContactBC;
-import contactlist.domain.Contact;
-import contactlist.exception.DuplicatedCpfException;
+import br.gov.prodepa.bookmark.business.SetorBC;
+import br.gov.prodepa.bookmark.domain.Setor;
 import contactlist.tablemodel.ContactTableModel;
 
 @ViewController
@@ -60,10 +58,10 @@ public class ContactView implements Serializable {
 
 	private ContactTableModel contactList;
 
-	private Contact selectedContact = new Contact();
+	private Setor selectedContact = new Setor();
 
 	@Inject
-	private ContactBC contactBC;
+	private SetorBC contactBC;
 
 	private boolean isDeleteEnabled = false;
 
@@ -89,11 +87,11 @@ public class ContactView implements Serializable {
 		isDeleteEnabled = true;
 	}
 
-	@ExceptionHandler
+	/*@ExceptionHandler
 	public void handleExceptions(DuplicatedCpfException exception) {
 		errorMessage = exception.getMessage();
 		hasError = true;
-	}
+	}*/
 
 	@ExceptionHandler
 	public void handleExceptions(ConstraintViolationException exception) {
@@ -118,19 +116,19 @@ public class ContactView implements Serializable {
 		}
 		isSaveEnabled = false;
 		isDeleteEnabled = false;
-		selectedContact = new Contact();
+		selectedContact = new Setor();
 		contactList = new ContactTableModel(contactBC.findAll(), resourceBundle);
 	}
 
 	@Transactional
-	@Validate
+	//@Validate
 	public void delete() {
 		if (selectedContact.getId() != null) {
 			contactBC.delete(selectedContact.getId());
 		}
 		isSaveEnabled = false;
 		isDeleteEnabled = false;
-		selectedContact = new Contact();
+		selectedContact = new Setor();
 		this.contactList = new ContactTableModel(contactBC.findAll(), resourceBundle);
 	}
 
@@ -155,33 +153,33 @@ public class ContactView implements Serializable {
 		isDeleteEnabled = true;
 	}
 
-	public Contact getSelectedContact() {
+	public Setor getSelectedContact() {
 		return selectedContact;
 	}
 
 	public String getName() {
-		return selectedContact.getName();
+		return selectedContact.getNome();
 	}
 
 	public void setName(String name) {
-		selectedContact.setName(name);
+		selectedContact.setNome(name);
 	}
 
 	public String getCpf() {
-		return selectedContact.getCpf();
+		return selectedContact.getNome();
 	}
 
 	public void setCpf(String cpf) {
-		selectedContact.setCpf(cpf);
+		//selectedContact.setCpf(cpf);
 	}
 
-	public void setContactBC(ContactBC contactBC) {
-		this.contactBC = contactBC;
+	/*public void setContactBC(ContactBC contactBC) {
+		//this.contactBC = contactBC;
 	}
 
 	public ContactBC getContactBC() {
 		return contactBC;
-	}
+	}*/
 
 	public void setTitle(String title) {
 		this.title = title;

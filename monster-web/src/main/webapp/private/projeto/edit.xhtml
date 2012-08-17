@@ -4,7 +4,6 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:rich="http://richfaces.org/rich"
-	xmlns:s="http://jboss.com/products/seam/taglib"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/templates/default.xhtml">
 	<ui:define name="titulo">
@@ -18,7 +17,7 @@
 
 	<ui:define name="conteudo">
 		<h:form id="form-usuario">
-			<ui:include src="usuario_form.xhtml" />
+			<ui:include src="form.xhtml" />
 			<hr size="1" />
 			<h:panelGrid columns="2" styleClass="grid"
 				columnClasses="column-label, column-control">
@@ -30,7 +29,6 @@
 						<h:graphicImage value="/images/icons/disk.png" />
 						<h:outputText value="Salvar" />
 					</a4j:commandLink>
-					<rich:spacer width="20px" />
 					<a4j:commandLink id="botao-voltar" styleClass="secondary-button"
 						action="#{usuarioAction.voltar}" title="Voltar para pesquisa"
 						immediate="true">
@@ -43,11 +41,5 @@
 				handler="document.getElementById('form-usuario:botao-salvar').click();" />
 		</h:form>
 		
-		<script language="JavaScript">
-        	function formFocus() {
-        		document.getElementById('form-usuario:usuario-tipo-documento').focus();
-			}
-        	formFocus();
-        </script>
 	</ui:define>
 </ui:composition>

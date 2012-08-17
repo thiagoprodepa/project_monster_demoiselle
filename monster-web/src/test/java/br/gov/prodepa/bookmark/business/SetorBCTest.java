@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
 import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.bookmark.dto.search.CommonSearchsDto;
 
 @RunWith(DemoiselleRunner.class)
 public class SetorBCTest {
@@ -58,7 +59,7 @@ public class SetorBCTest {
 
 	@Test
 	public void testFindByExample() {
-		List<Setor> setores = setorBC.findByExamples(new Setor("G"));
+		List<Setor> setores = setorBC.findByExamples(new CommonSearchsDto("G"));
 		
 		System.out.println(setores);
 	}
