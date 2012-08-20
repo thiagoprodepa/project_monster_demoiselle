@@ -22,13 +22,6 @@ public class SetorEditMB extends AbstractEditPageBean<Setor, Long> {
 
 	@Inject
 	private SetorBC setorBc;
-	
-	//@Named
-	//@Produces
-	public Setor getSetorView() {
-		return new Setor("nomeee");
-	}
-			
 
 	@Override
 	@Transactional

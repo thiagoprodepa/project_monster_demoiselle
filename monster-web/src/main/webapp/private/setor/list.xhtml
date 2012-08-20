@@ -16,7 +16,7 @@
 	
 	<ui:define name="conteudo">
 		<!-- Resultado da pesquisa -->
-		<h:form id="form-lista-perfil">
+		<h:form id="form-lista-perfil" prependId="false">
 			<h:panelGrid styleClass="gridPanel">
 				<h:panelGroup rendered="#{empty setorListMB.resultList}">
 					<h:outputText value="Nenhum resultado encontrado." />
@@ -44,33 +44,30 @@
 						</f:facet>
 						<h:outputText value="#{u.nome}" />
 					</rich:column>
-					                    
+					                       
                     <rich:column styleClass="iconColumn">
-						<f:facet name="header">View</f:facet>
-						<a4j:commandLink render="@all" action="#{setorListMB.getCurrentView}" onclick="#{rich:component('usuario-view')}.show(); return false;">
-							<h:graphicImage value="../../images/ico_manter_lote.gif" style="border:0px" />
+						<f:facet name="header"><h:graphicImage value="/images/icon_view.png" style="border:0px" /></f:facet>
+						<a4j:commandLink render="usuario-view" action="#{setorListMB.getCurrentView}" oncomplete="#{rich:component('usuario-view')}.show(); return false;">
+							<h:graphicImage value="/images/icon_view.png" style="border:0px" />
 							<f:param name="id" value="#{u.id}" />
 						</a4j:commandLink>
 					</rich:column>
-                    
 					
 					<rich:column styleClass="iconColumn">
-						<f:facet name="header">Edit</f:facet>
+						<f:facet name="header"><h:graphicImage value="/images/pencil.png" style="border:0px" /></f:facet>
 						<h:commandLink action="#{setorListMB.getNextView}" actionListener="#{setorListMB.clear}">
-							<h:graphicImage value="../../images/ico_manter_lote.gif" style="border:0px" />
+							<h:graphicImage value="/images/pencil.png" style="border:0px" />
 							<f:param name="id" value="#{u.id}" />
 						</h:commandLink>
 					</rich:column>
 					
-					<h:column styleClass="iconColumn"> 
-						<f:facet name="header"> 
-							<h:outputText value=""/> 
-						</f:facet> 
-						<a4j:commandLink action="#{loteAction.selecionar}"  view="/aluno/lote/lote_update.xhtml" title="Alterar Lote">
-							<h:graphicImage value="../../images/pencil.png" style="border:0px" /> 
- 						<f:param name="id" value="#{u.id}" />
-						</a4j:commandLink> 
-					</h:column>
+					 <rich:column styleClass="iconColumn">
+						<f:facet name="header"><h:graphicImage value="/images/icon_lixo.png" style="border:0px" /></f:facet>
+						<a4j:commandLink render="usuario-delete" action="#{setorListMB.getCurrentView}" oncomplete="#{rich:component('usuario-delete')}.show(); return false;">
+							<h:graphicImage value="/images/icon_lixo.png" style="border:0px" />
+							<f:param name="id" value="#{u.id}" />
+						</a4j:commandLink>
+					</rich:column>
 
 					<f:facet name="footer">
 						<rich:dataScroller id="paginador" for="usuarios" maxPages="10"
@@ -80,40 +77,71 @@
 			</h:panelGrid>
 
 		
-		<rich:popupPanel id="usuario-view" modal="true" autosized="true" resizeable="false" minWidth="450" minHeight="150" moveable="true">
-	        <f:facet name="header">
-	            <h:outputText value="Setor" />
-	        </f:facet>
-	        <f:facet name="controls">
-	            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('usuario-view')}.hide(); return false;">
-	                X
-	            </h:outputLink>
-	        </f:facet>
-	        
-	        
-           	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
-				<h:panelGrid id="testModal" columns="2" styleClass="grid"
-					columnClasses="column-label, column-control">
-					
-					<h:outputLabel value="Chave: #{setorEditMB.SetorView.nome} " for="usuario-chave" />
-					<h:outputText id="usuario-chave" value="#{setorEditMB.bean.id}" />
-					
-					<h:outputLabel value="Nome: " for="usuario-nome" />
-					<h:outputText id="usuario-nome" value="#{setorEditMB.bean.nome}" />
-											
-				</h:panelGrid>
-			</h:panelGroup>
-			
-			<hr size="1" />
-			<h:panelGrid columns="2" styleClass="grid"
-				columnClasses="column-label, column-control">
-				<h:panelGroup style="text-align: right;">
-					<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
-						onclick="#{rich:component('usuario-view')}.hide();" />
+			<rich:popupPanel id="usuario-view" modal="true" resizeable="false" width="150" height="110" moveable="true">
+		        <f:facet name="header">
+		            <h:outputText value="Visualizar Setor" />
+		        </f:facet>
+		        <f:facet name="controls">
+		            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('usuario-view')}.hide(); return false;">
+		                X
+		            </h:outputLink>
+		        </f:facet>
+	           	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
+					<h:panelGrid columns="2" styleClass="grid"
+						columnClasses="column-label, column-control">
+						
+						<h:outputLabel value="Chave:" for="usuario-chave" />
+						<h:outputText value="#{setorEditMB.bean.id}" />
+						
+						<h:outputLabel value="Nome: " for="usuario-nome" />
+						<h:outputText value="#{setorEditMB.bean.nome}" />
+												
+					</h:panelGrid>
 				</h:panelGroup>
-			</h:panelGrid>
-			
-	    </rich:popupPanel>
-		</h:form>
+				<hr size="1" />
+				<br />
+				<h:panelGrid columns="2" styleClass="grid"
+					columnClasses="column-label, column-control">
+					<h:panelGroup style="text-align: right;">
+						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
+							onclick="#{rich:component('usuario-view')}.hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+		    </rich:popupPanel>
+		    
+		    <rich:popupPanel id="usuario-delete" modal="true" resizeable="false" width="150" height="110" moveable="true">
+		        <f:facet name="header">
+		            <h:outputText value="Excluir Setor" />
+		        </f:facet>
+		        <f:facet name="controls">
+		            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('usuario-delete')}.hide(); return false;">
+		                X
+		            </h:outputLink>
+		        </f:facet>
+	           	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
+					<h:panelGrid columns="2" styleClass="grid"
+						columnClasses="column-label, column-control">
+						
+						<h:outputLabel value="Chave:" for="usuario-chave" />
+						<h:outputText value="#{setorEditMB.bean.id}" />
+						
+						<h:outputLabel value="Nome: " for="usuario-nome" />
+						<h:outputText value="#{setorEditMB.bean.nome}" />
+												
+					</h:panelGrid>
+				</h:panelGroup>
+				<hr size="1" /><br />
+				<h:panelGrid columns="2" styleClass="grid" columnClasses="column-label, column-control">
+					<h:panelGroup style="text-align: right;">
+						<h:commandLink value="Excluir" title="Excluir" action="#{setorEditMB.delete}"
+							           onclick="#{rich:component('usuario-delete')}.hide();" styleClass="secondary-button" />
+						
+						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
+						               onclick="#{rich:component('usuario-delete')}.hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+		    </rich:popupPanel>
+		    
+	 	</h:form>
 	</ui:define>
 </ui:composition>
