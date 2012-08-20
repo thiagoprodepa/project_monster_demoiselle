@@ -1,50 +1,59 @@
 package br.gov.prodepa.bookmark.view;
 
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
+import br.gov.frameworkdemoiselle.template.AbstractPageBean;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 
 import br.gov.prodepa.bookmark.business.BookmarkBC;
 import br.gov.prodepa.bookmark.business.SetorBC;
 import br.gov.prodepa.bookmark.domain.Bookmark;
 import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.bookmark.domain.Usuario;
 
 @ViewController
-@PreviousView("/setor/bookmark_list.xhtml")
-public class SetorMB extends AbstractEditPageBean<Setor, Long> {
+@PreviousView("/private/usuario/list.xhtml")
+public class UsuarioMB extends AbstractPageBean {
 
 	private static final long serialVersionUID = 1L;
 
+
 	@Inject
-	private SetorBC setorkBC;
+	private Usuario usuario;
+	
+	@Inject
+	private SetorBC setorBc;
+	
+	
+	
+	
 
-	@Override
-	@Transactional
-	public String delete() {
-		this.setorkBC.delete(getId());
+	/*@Transactional
+	public String insert(Usuario usuario) {
+		this.setorBc.insert(usuario);
 		return getPreviousView();
 	}
-
-	@Override
-	@Transactional
-	public String insert() {
-		this.setorkBC.insert(getBean());
-		return getPreviousView();
-	}
-
-	@Override
+	
 	@Transactional
 	public String update() {
-		this.setorkBC.update(getBean());
+		this.setorBc.update(getBean());
 		return getPreviousView();
 	}
 
-	@Override
-	protected void handleLoad() {
-		setBean(this.setorkBC.load(getId()));
+	@Transactional
+	public String delete() {
+		this.setorBc.delete(getId());
+		return getPreviousView();
 	}
+
+
+	protected void handleLoad() {
+		setBean(this.setorBc.load(getId()));
+	}*/
 
 }

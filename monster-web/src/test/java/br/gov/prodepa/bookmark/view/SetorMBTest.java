@@ -8,12 +8,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import br.gov.frameworkdemoiselle.junit.DemoiselleRunner;
+import br.gov.prodepa.bookmark.business.SetorBC;
 
 @RunWith(DemoiselleRunner.class)
 public class SetorMBTest {
 
 	@Inject
-	SetorMB setorMB;
+	SetorBC setorBC;
 	
 	@Test
 	public void testHandleLoad() {

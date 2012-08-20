@@ -8,37 +8,13 @@
 	xmlns:rich="http://richfaces.org/rich">
 
 	<h:panelGroup layout="block" styleClass="menu_vertical"	>
-		<h:outputText value="Um login vai bem" />
-		
-		<h:form id="interpassloginForm">
-			<div id="login_box" >
-				<div id="campos">
-					<div id="login_campo1">
-						<strong>Usuário</strong>: 
-						<h:inputText id="interpassuser" value="#{identity.username}" class="txt_conteudo" size="20" maxlength="30" required="true" requiredMessage="Informe o usuário." />
-					</div>
-
-					<div id="login_campo2">
-						<strong>Senha</strong>: 
-						<h:inputSecret id="interpasssenha" redisplay="false" value="#{identity.password}" class="txt_conteudo" size="20" maxlength="30" required="true" requiredMessage="Informe a senha." />
-					</div>
-
-					<div id="login_botao">
-						<h:commandButton value="Entrar" action="#{identity.login}" style="ft2" />
-					</div>
-
-				</div>
-			</div>
-		</h:form>
-		
-	</h:panelGroup>
-	<h:panelGroup layout="block" styleClass="menu_vertical"	>
 	
 	<h:form id="menuForm">
 	<rich:panelMenu style="width:155px" 
 	                itemMode="server" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
-                groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
-                topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" >
+                    groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
+                    topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" 
+                    rendered="#{securityContext.loggedIn}">
                 
                 <rich:panelMenuGroup label="Manters" expanded="true">
                 
@@ -56,13 +32,6 @@
 									style="font-size: 10px; color:red"
 									reRender="mainArea, barArea" />
 									
-				   <rich:panelMenuItem label="Resfis"
-									action="#{planoCadastralAction.startConversation}"
-									styleClass="itemMenuVertical"
-									icon="/images/menus/planos_cadastrais.png"
-									style="font-size: 10px; color:red"
-									reRender="mainArea, barArea" />
-													
 				   <rich:panelMenuItem label="Setores"  
 									action="/private/setor/list.jsf"
 									styleClass="itemMenuVertical"

@@ -19,6 +19,7 @@ import br.gov.prodepa.bookmark.business.SetorBC;
 import br.gov.prodepa.bookmark.domain.Bookmark;
 import br.gov.prodepa.bookmark.domain.Setor;
 import br.gov.prodepa.bookmark.dto.search.CommonSearchsDto;
+import br.gov.prodepa.bookmark.secutity.Credenciais;
 
 @ViewController
 @NextView("/private/setor/edit.jsf")
@@ -29,6 +30,9 @@ public class SetorListMB extends AbstractListPageBean<Setor, Long> {
 
 	@Inject
 	private SetorBC bc;
+	
+	@Inject
+	Credenciais credenciais;
 	
 	private CommonSearchsDto searchsDto;
 

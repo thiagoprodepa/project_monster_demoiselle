@@ -12,26 +12,20 @@
 	
 	<div id="topo">
 		<div id="logo">
-			<h:link action="/credenciamento/credenciamento.seam" title="Página inicial" >
-				<h:graphicImage value="/images/logo_sistema.png" width="230" height="40" style="border: 0px; margin-top: 7px;"/>
+			<h:link action="/private/principal/principal.jsf" title="Página inicial"  >
+				<h:graphicImage value="/images/selo_prodepa.gif" width="120" height="30" style="border: 0px; margin-top: 7px;"/>
 			</h:link>
 		</div>
-
+	<h:form>
 		<div class="caminho_naveg" id="usuario">
-			
 			<a4j:region id="pollRegiao" selfRendered="true" renderRegionOnly="true" >
 			    <strong>
-	              <h:outputText value="Olá, #{sessionInformations.usuarioMPIDto.nome} - #{sessionInformations.usuarioMPIDto.instituicao.nomeFantasia}" rendered="#{identity.loggedIn}" />
+	              <h:outputText value="Olá, #{credential.username}" rendered="#{securityContext.loggedIn}" />
 	            </strong>
-	            <h:panelGroup rendered="#{!identity.loggedIn}">
-					 login:
-					<h:link value=" aluno" action="#{controller.toLoginAlunoPage}" style="COLOR: #FFFFFF;" reRender="mainArea"/>
-		            <h:outputText value="|"/>  
-		            <h:link value=" gestor " action="#{controller.toLoginPage}" style="COLOR: #FFFFFF;" reRender="mainArea"/>	
-				</h:panelGroup> 
-	            <h:link value=" sair" action="#{autenticador.logout}" style="COLOR: #FFFFFF;" rendered="#{identity.loggedIn}"/>	
+	            <h:commandLink value=" sair" action="#{securityContext.logout}" style="COLOR: #FFFFFF;" rendered="#{securityContext.loggedIn}"/>	
 			</a4j:region>
 		</div>
+	</h:form>
 
 	</div>
 	
