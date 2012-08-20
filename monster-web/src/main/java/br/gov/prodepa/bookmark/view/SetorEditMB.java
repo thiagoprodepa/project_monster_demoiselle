@@ -1,6 +1,8 @@
 package br.gov.prodepa.bookmark.view;
 
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
@@ -20,6 +22,13 @@ public class SetorEditMB extends AbstractEditPageBean<Setor, Long> {
 
 	@Inject
 	private SetorBC setorBc;
+	
+	//@Named
+	//@Produces
+	public Setor getSetorView() {
+		return new Setor("nomeee");
+	}
+			
 
 	@Override
 	@Transactional
