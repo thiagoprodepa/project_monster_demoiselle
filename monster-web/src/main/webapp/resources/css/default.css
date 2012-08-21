@@ -8,6 +8,7 @@ font-weight: lighter;
 color: red;
 text-align: center;
 width
+text-align:right
 */
 
 /* ===== Body ===== */
@@ -16,7 +17,7 @@ html, body {
 	height: 100%;
 	font-family: Tahoma, Verdana, Arial, sans-serif;
 	font-size: 11px;
-
+ 
 	background-color:  #efefef !important;
 	
 }

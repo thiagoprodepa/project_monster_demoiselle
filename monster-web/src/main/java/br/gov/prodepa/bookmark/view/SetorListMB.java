@@ -34,25 +34,27 @@ public class SetorListMB extends AbstractListPageBean<Setor, Long> {
 	@Inject
 	Credenciais credenciais;
 	
-	private CommonSearchsDto searchsDto;
+	CommonSearchsDto searchsDto;
 
-	public void search(CommonSearchsDto searchsDto) {
-		System.out.println(searchsDto.getPattern());
-		
-		bc.findByExamples(searchsDto);
-		
-	}
-	
-	@Named 
 	@Produces 
-	@ConversationScoped
+	@Named("searchsDto") 
 	public CommonSearchsDto getSearchsDto() { 
-		return new CommonSearchsDto(); 
+		return new CommonSearchsDto("AKI"); 
+	}
+
+	public void search(CommonSearchsDto dto) {
+		System.out.println(dto.getPattern());
+		this.searchsDto = dto;
+		handleResultList();
 	}
 	
 	@Override
 	protected List<Setor> handleResultList() {
-		return this.bc.findAll();
+		
+		System.out.println(searchsDto);
+		
+		return bc.findByExamples(searchsDto);
+		//return this.bc.findAll();
 	}
 
 	@Transactional

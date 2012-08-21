@@ -1,59 +1,86 @@
 package br.gov.prodepa.bookmark.view;
 
+import java.util.List;
+
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.gov.frameworkdemoiselle.annotation.NextView;
 import br.gov.frameworkdemoiselle.annotation.PreviousView;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
-import br.gov.frameworkdemoiselle.template.AbstractEditPageBean;
 import br.gov.frameworkdemoiselle.template.AbstractPageBean;
-import br.gov.frameworkdemoiselle.transaction.Transactional;
-
-import br.gov.prodepa.bookmark.business.BookmarkBC;
-import br.gov.prodepa.bookmark.business.SetorBC;
-import br.gov.prodepa.bookmark.domain.Bookmark;
-import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.bookmark.business.UsuarioServiceBC;
 import br.gov.prodepa.bookmark.domain.Usuario;
+import br.gov.prodepa.bookmark.dto.search.CommonSearchsDto;
+import br.gov.prodepa.bookmark.qualifier.UsuarioForm;
 
 @ViewController
+@NextView("/private/usuario/edit.xhtml")
 @PreviousView("/private/usuario/list.xhtml")
 public class UsuarioMB extends AbstractPageBean {
 
 	private static final long serialVersionUID = 1L;
 
-
 	@Inject
+	@UsuarioForm
 	private Usuario usuario;
-	
+
 	@Inject
-	private SetorBC setorBc;
+	private UsuarioServiceBC usuarioService;
+	
+	private List<Usuario> usuarios;
+	
+	private CommonSearchsDto searchsDto = new CommonSearchsDto();
 	
 	
-	
-	
-
-	/*@Transactional
-	public String insert(Usuario usuario) {
-		this.setorBc.insert(usuario);
+	public String insert() {
+		this.usuarioService.insert(usuario);
 		return getPreviousView();
 	}
 	
-	@Transactional
 	public String update() {
-		this.setorBc.update(getBean());
+		this.usuarioService.update(this.usuario);
 		return getPreviousView();
 	}
-
-	@Transactional
+	
 	public String delete() {
-		this.setorBc.delete(getId());
+		this.usuarioService.delete(this.usuario.getId());
 		return getPreviousView();
 	}
+	
+	public void search() {
+		this.usuarios = this.usuarioService.findByExample(searchsDto);
+		System.out.println(this.usuarios);
+	}
+	
+	@Named
+	@Produces
+	@UsuarioForm
+	public Usuario getUsuarioForm() {
+		return this.usuario != null ? this.usuario : new Usuario();
+	}
+	
+	@Produces
+	@Named("usuarios")
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
 
+	
+	
+	public CommonSearchsDto getSearchsDto() {
+		return searchsDto;
+	}
 
-	protected void handleLoad() {
-		setBean(this.setorBc.load(getId()));
-	}*/
+	public void setSearchsDto(CommonSearchsDto searchsDto) {
+		this.searchsDto = searchsDto;
+	}
 
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	
+	
 }

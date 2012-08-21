@@ -30,7 +30,12 @@ public class SetorBC extends JPACrud<Setor, Long> {
 	public List<Setor> findByExamples(CommonSearchsDto example) {
 		
 		//TODO PROBLEM Esse metodo findByExample devera receber um param diferente do declarado na classe para suportar esse caso.
-		return findByExample(new Setor(example.getPattern()));
+		
+		if(example == null) {
+			return findByExample(new Setor());
+		} else {
+			return findByExample(new Setor(example.getPattern()));
+		}
 	}
 	
 }

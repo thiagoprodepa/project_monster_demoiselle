@@ -7,6 +7,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/WEB-INF/templates/default.xhtml">
 	
+	<ui:define name="head">
+	
+		
+	
+	</ui:define>
+
+
 	<ui:define name="titulo">Pesquisa de Usuário</ui:define>
 
 	<ui:define name="caminho">
@@ -31,14 +38,22 @@
 								 width="70%">
 								 
 						<h:outputText value="Filtrar" />
-					    <h:inputText id="query" value="#{searchsDto.pattern}" style="width: 165px;" autocomplete="off">
-							<a4j:ajax event="keyup" render="setoresGrid" listener="#{setorListMB.search(searchsDto)}" />
-						</h:inputText>
+					    <h:inputText id="query" value="#{usuarioMB.searchsDto.pattern}" style="width: 165px;" autocomplete="off"/>
 					</h:panelGrid>
 			
 					<h:panelGrid columns="1" styleClass="grade" width="30%">
+						
+						<a4j:commandLink id="botao-search"
+								         action="#{usuarioMB.search}"
+								         title="Pesquisar usuários"
+								         styleClass="secondary-button" style="text-align:right"
+								 		 render="usuariosGrid"	>
+							<h:graphicImage value="/images/ico_lupa.gif" />
+							<h:outputText value="Pesquisar" />
+						</a4j:commandLink>
+						<br />
 						<a4j:commandLink id="botao-voltar"
-								 action="#{setorListMB.getNextView}"
+								 action="#{usuarioMB.getNextView}"
 								 title="Voltar para pesquisa"
 								 styleClass="secondary-button"
 								 style="text-align:right"
@@ -52,15 +67,15 @@
 			</rich:panel>
 			
 		
-			<h:panelGrid id="setoresGrid" styleClass="gridPanel">
-			
-				<h:panelGroup rendered="#{empty setorListMB.resultList}">
+			<h:panelGrid id="usuariosGrid" styleClass="gridPanel">
+			    
+				<h:panelGroup rendered="#{empty usuarioMB.usuarios}">
 					<h:outputText value="Nenhum resultado encontrado." />
 				</h:panelGroup>
 				
-				<rich:dataTable id="usuarios" var="u" value="#{setorListMB.resultList}" 
+				<rich:dataTable id="usuarios" var="u" value="#{usuarios}" 
 					            rows="10" rowKeyVar="indice" cellpadding="0" cellspacing="0"
-					            styleClass="gridPanel" border="0" rendered="#{not empty setorListMB.resultList}">
+					            styleClass="gridPanel" border="0" rendered="#{not empty usuarioMB.usuarios}">
 					
 					<rich:column id="column-indice" styleClass="iconColumn">
 						<f:facet name="header" />

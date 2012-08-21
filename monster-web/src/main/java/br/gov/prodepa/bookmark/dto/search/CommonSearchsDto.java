@@ -30,4 +30,9 @@ public class CommonSearchsDto implements Serializable {
 		this.pattern = pattern;
 	}
 	
+	@Override
+	public String toString() {
+		return pattern;
+	}
+	
 }
