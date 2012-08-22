@@ -20,16 +20,17 @@
 
 			<h:panelGrid columns="2" columnClasses="cl12Label, cl80_view" width="100%" > 
 	
-				<h:outputText value="id" rendered="#{not empty usuarioForm.id}" />
-				<h:outputText id="id" value="#{usuarioForm.id}" rendered="#{not empty usuarioForm.id}" />
-			
-				<h:outputText value="nome" />
-				<h:inputText value="#{usuarioForm.nome}" />							 
+	            <h:outputText value="ID" />
+				<h:inputText value="#{usuarioMB.usuario.id}" />
+	
+				<h:outputText value="Nome" />
+				<h:inputText value="#{usuarioMB.usuario.nome}" />
 							 
 			</h:panelGrid>
 
-		
+			
 			<hr size="1" />
+			<br />
 			<h:panelGrid columns="2" styleClass="grid" columnClasses="column-label, column-control">
 				
 				<h:outputText value="(*) Campo requerido" />
@@ -38,7 +39,7 @@
 				
 					<a4j:commandLink id="botao-insert" 
 						  		     action="#{usuarioMB.insert}"
-						  		     rendered="#{empty usuarioForm.id}" 
+						  		     rendered="#{empty usuarioMB.usuario.id}" 
 						  		     title="Confirmar inserção"
 						             reRender="form-usuario"
 						             styleClass="orange-button">
@@ -48,7 +49,7 @@
 					
 					<a4j:commandLink id="botao-update" 
 						  		     action="#{usuarioMB.update}"
-						  		     rendered="#{not empty usuarioForm.id}" 
+						  		     rendered="#{not empty usuarioMB.usuario.id}" 
 						  		     title="Confirmar alteração"
 						             reRender="form-usuario"
 						             styleClass="orange-button">
@@ -57,7 +58,7 @@
 					</a4j:commandLink>
 					
 					<a4j:commandLink id="botao-voltar"
-									 action="#{setorListMB.getPreviousView}"
+									 action="#{usuarioMB.getPreviousView}"
 									 title="Voltar para pesquisa"
 									 styleClass="secondary-button"
 									 >
