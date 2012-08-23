@@ -31,8 +31,8 @@
 								 width="70%">
 								 
 						<h:outputText value="Filtrar" />
-					    <h:inputText id="query" value="#{searchsDto.pattern}" style="width: 165px;" autocomplete="off">
-							<a4j:ajax event="keyup" render="setoresGrid" listener="#{setorListMB.search(searchsDto)}" />
+					    <h:inputText id="query" value="#{setorListMB.searchsDto.pattern}" style="width: 165px;" autocomplete="off">
+							<a4j:ajax event="keyup" render="setoresGrid" listener="#{setorListMB.search}" />
 						</h:inputText>
 					</h:panelGrid>
 			

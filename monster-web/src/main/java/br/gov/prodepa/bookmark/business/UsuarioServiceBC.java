@@ -57,6 +57,8 @@ public class UsuarioServiceBC extends JPACrud<Usuario, Long> {
 		if(dto == null) {
 			return findByExample(new Usuario());
 		} else {
+			
+			System.out.println(">>>>>>>> " + dto.getPattern());
 			return findByExample(new Usuario(dto.getPattern()));
 		}
 		

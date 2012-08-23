@@ -17,20 +17,21 @@
 
 	<ui:define name="conteudo">
 		<h:form id="form-usuario">
-
+			
 			<h:panelGrid columns="2" columnClasses="cl12Label, cl80_view" width="100%" > 
 	
-	            <h:outputText value="ID" />
-				<h:inputText value="#{usuarioMB.usuario.id}" />
-	
-				<h:outputText value="Nome" />
-				<h:inputText value="#{usuarioMB.usuario.nome}" />
+				<h:outputText value="id" />
+				<h:outputText id="id" value="#{usuarioEditMB.bean.id}" />
+			
+				<h:outputText value="nome" />
+				<h:inputText value="#{usuarioEditMB.bean.nome}" />							 
 							 
 			</h:panelGrid>
 
-			
+		
 			<hr size="1" />
 			<br />
+			
 			<h:panelGrid columns="2" styleClass="grid" columnClasses="column-label, column-control">
 				
 				<h:outputText value="(*) Campo requerido" />
@@ -38,8 +39,8 @@
 				<h:panelGroup style="text-align: right;">
 				
 					<a4j:commandLink id="botao-insert" 
-						  		     action="#{usuarioMB.insert}"
-						  		     rendered="#{empty usuarioMB.usuario.id}" 
+						  		     action="#{usuarioEditMB.insert}"
+						  		     rendered="#{!usuarioEditMB.updateMode}" 
 						  		     title="Confirmar inserção"
 						             reRender="form-usuario"
 						             styleClass="orange-button">
@@ -48,8 +49,8 @@
 					</a4j:commandLink>
 					
 					<a4j:commandLink id="botao-update" 
-						  		     action="#{usuarioMB.update}"
-						  		     rendered="#{not empty usuarioMB.usuario.id}" 
+						  		     action="#{usuarioEditMB.update}"
+						  		     rendered="#{usuarioEditMB.updateMode}" 
 						  		     title="Confirmar alteração"
 						             reRender="form-usuario"
 						             styleClass="orange-button">
@@ -58,7 +59,7 @@
 					</a4j:commandLink>
 					
 					<a4j:commandLink id="botao-voltar"
-									 action="#{usuarioMB.getPreviousView}"
+									 action="#{usuarioListMB.getPreviousView}"
 									 title="Voltar para pesquisa"
 									 styleClass="secondary-button"
 									 >

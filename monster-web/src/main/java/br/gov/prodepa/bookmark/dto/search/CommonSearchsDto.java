@@ -6,7 +6,7 @@ import javax.inject.Named;
 
 import br.gov.frameworkdemoiselle.annotation.Name;
 
-@Named
+//@Named("searchsDto")
 public class CommonSearchsDto implements Serializable {
 
 	private static final long serialVersionUID = 4613442883761171258L;
@@ -32,7 +32,7 @@ public class CommonSearchsDto implements Serializable {
 	
 	@Override
 	public String toString() {
-		return pattern;
+		return "Pattern: " + pattern;
 	}
 	
 }
