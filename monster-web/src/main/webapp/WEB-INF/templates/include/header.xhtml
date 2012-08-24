@@ -20,7 +20,7 @@
 		<div class="caminho_naveg" id="usuario">
 			<a4j:region id="pollRegiao" selfRendered="true" renderRegionOnly="true" >
 			    <strong>
-	              <h:outputText value="Olá, #{credential.username}" rendered="#{securityContext.loggedIn}" />
+	              <h:outputText value="Olá, #{credential.username} (#{testDto.pattern})" rendered="#{securityContext.loggedIn}" />
 	            </strong>
 	            <h:commandLink value=" sair" action="#{securityContext.logout}" style="COLOR: #FFFFFF;" rendered="#{securityContext.loggedIn}"/>	
 			</a4j:region>

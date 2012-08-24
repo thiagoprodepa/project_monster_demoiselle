@@ -42,8 +42,7 @@
 								 title="Voltar para pesquisa"
 								 styleClass="secondary-button"
 								 style="text-align:right"
-								 render="projetosGrid"
-								 >
+								 render="projetosGrid">
 							<h:graphicImage value="/images/ico_lupa.gif" />
 							<h:outputText value="Pesquisar" />
 						</a4j:commandLink>
@@ -64,14 +63,15 @@
 			
 		
 			<h:panelGrid id="projetosGrid" styleClass="gridPanel">
-			
+				
 				<h:panelGroup rendered="#{empty projetoMB.projetos}">
 					<h:outputText value="Nenhum resultado encontrado." />
 				</h:panelGroup>
 				
 				<rich:dataTable id="projetos" var="u" value="#{projetoMB.projetos}" 
 					            rows="10" rowKeyVar="indice" cellpadding="0" cellspacing="0"
-					            styleClass="gridPanel" border="0" >
+					            styleClass="gridPanel" border="0" 
+					            rendered="#{not empty projetoMB.projetos}">
 					
 					<rich:column id="column-indice" styleClass="iconColumn">
 						<f:facet name="header" />
@@ -94,7 +94,7 @@
 					                       
                     <rich:column styleClass="iconColumn">
 						<f:facet name="header"><h:graphicImage value="/images/icon_view.png" style="border:0px" /></f:facet>
-						<a4j:commandLink render="projeto-view" action="#{projetoMB.select}" oncomplete="#{rich:component('projeto-view')}.show(); return false;">
+						<a4j:commandLink render="projeto-view" action="#{projetoMB.select()}" oncomplete="#{rich:component('projeto-view')}.show(); return false;">
 							<h:graphicImage value="/images/icon_view.png" style="border:0px" />
 							<f:param name="id" value="#{u.id}" />
 						</a4j:commandLink>
@@ -102,10 +102,10 @@
 					
 					<rich:column styleClass="iconColumn">
 						<f:facet name="header"><h:graphicImage value="/images/pencil.png" style="border:0px" /></f:facet>
-						<h:outputLink value="/project-monster/private/projeto/edit.jsf" >
+						<h:commandLink action="#{projetoMB.getEditView}">
 							<h:graphicImage value="/images/pencil.png" style="border:0px" />
 							<f:param name="id" value="#{u.id}" />
-						</h:outputLink>
+						</h:commandLink>
 					</rich:column>
 					
 					 <rich:column styleClass="iconColumn">
@@ -137,11 +137,11 @@
 					<h:panelGrid columns="2" styleClass="grid"
 						columnClasses="column-label, column-control">
 						
-						<h:outputLabel value="Chave:" for="projeto-chave" />
-						<h:outputText value="#{projetoMB.projeto.id}" />
+						<h:outputLabel value="Chave:" for="projeto-id" />
+						<h:outputText id="projeto-id" value="#{projetoMB.projeto.id}" />
 						
 						<h:outputLabel value="Nome: " for="projeto-nome" />
-						<h:outputText value="#{projetoMB.projeto.nome}" />
+						<h:outputText id="projeto-nome" value="#{projetoMB.projeto.nome}" />
 												
 					</h:panelGrid>
 				</h:panelGroup>
@@ -169,11 +169,11 @@
 					<h:panelGrid columns="2" styleClass="grid"
 						columnClasses="column-label, column-control">
 						
-						<h:outputLabel value="Chave:" for="projeto-chave" />
-						<h:outputText value="#{projetoMB.projeto.id}" />
+						<h:outputLabel value="Chave:" for="projeto-delete-id" />
+						<h:outputText id="projeto-delete-id" value="#{projetoMB.projeto.id}" />
 						
-						<h:outputLabel value="Nome: " for="projeto-nome" />
-						<h:outputText value="#{projetoMB.projeto.nome}" />
+						<h:outputLabel value="Nome: " for="projeto-delete-nome" />
+						<h:outputText id="projeto-delete-nome" value="#{projetoMB.projeto.nome}" />
 												
 					</h:panelGrid>
 				</h:panelGroup>

@@ -3,8 +3,9 @@ package br.gov.prodepa.monster.project.view;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.context.Conversation;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.inject.Produces;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,16 +17,16 @@ import br.gov.prodepa.monster.project.business.ProjetoServiceBC;
 import br.gov.prodepa.monster.project.domain.Projeto;
 import br.gov.prodepa.monster.project.dto.search.CommonSearchsDto;
 
-@Named
-@RequestScoped
-//@ViewController
+//@Named
+//@RequestScoped
+@ViewController
 public class ProjetoMB implements Serializable { 
 
 	private static final long serialVersionUID = 1L;
 
 	
-	private static final String LIST = "/private/projeto/list.xhtml";
-	private static final String EDIT = "/private/projeto/edit.xhtml";
+	private static final String LIST = "/private/projeto/list.jsf";
+	private static final String EDIT = "/private/projeto/edit.jsf";
 	
 	private Projeto projeto;
 	
@@ -33,11 +34,9 @@ public class ProjetoMB implements Serializable {
 	
 	private CommonSearchsDto searchsDto = new CommonSearchsDto();
 	
-	int ct = 0;
-	
 	@Inject
 	private ProjetoServiceBC bc;
-
+	
 	public String insert() {
 		this.bc.insert(this.projeto);
 		return getListView();
@@ -50,6 +49,10 @@ public class ProjetoMB implements Serializable {
 	
 	public void search() {
 		projetos = bc.findByExample(this.searchsDto);
+		
+		System.out.println(projetos);
+		
+		//return LIST;
 	}
 
 	public String delete() {
@@ -105,24 +108,13 @@ public class ProjetoMB implements Serializable {
 	}
 
 	public Projeto getProjeto() {
-		ct++;
-		System.out.println(getId() + " > " + ct);
-		
 		if(this.projeto == null) {
-		if(getId() != null) {
-			this.projeto = this.bc.load(getId());
-		} else {
-			this.projeto = new Projeto();
-		}
-		}
-		
-		/*if(this.projeto == null) {
 			if(getId() != null) {
 				this.projeto = this.bc.load(getId());
 			} else {
-				return null;
+				this.projeto = new Projeto();
 			}
-		}*/
+		}
 		return projeto;
 	}
 

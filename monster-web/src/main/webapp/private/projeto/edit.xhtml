@@ -19,7 +19,7 @@
 		<h:form id="form-projeto">
 			
 			<h:panelGrid columns="2" columnClasses="cl12Label, cl80_view" width="100%" > 
-	
+				
 				<h:outputText value="id" />
 				<h:outputText id="id" value="#{projetoMB.projeto.id}" />
 			
@@ -62,7 +62,7 @@
 					</a4j:commandLink>
 					
 					<a4j:commandLink id="botao-voltar"
-									 action="#{projetoListMB.getPreviousView}"
+									 action="#{projetoMB.getListView}"
 									 title="Voltar para pesquisa"
 									 styleClass="secondary-button"
 									 >

@@ -7,14 +7,14 @@
 	xmlns:a4j="http://richfaces.org/a4j"
 	xmlns:rich="http://richfaces.org/rich">
 
-	<h:panelGroup layout="block" styleClass="menu_vertical"	>
+	<h:panelGroup layout="block" styleClass="menu_vertical"	rendered="#{securityContext.loggedIn}">
 	
 	<h:form id="menuForm">
 	<rich:panelMenu style="width:155px" 
 	                itemMode="server" groupMode="ajax" groupExpandedLeftIcon="triangleUp"
                     groupCollapsedLeftIcon="triangleDown" topGroupExpandedRightIcon="chevronUp"
                     topGroupCollapsedRightIcon="chevronDown" itemLeftIcon="disc" 
-                    rendered="#{securityContext.loggedIn}">
+                    >
                 
                 <rich:panelMenuGroup label="Manters" expanded="true">
                 
