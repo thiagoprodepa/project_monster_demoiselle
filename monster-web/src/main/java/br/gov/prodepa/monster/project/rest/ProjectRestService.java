@@ -39,7 +39,7 @@ import br.gov.prodepa.monster.project.domain.Bookmark;
  * </p>
  */
 @Stateless
-public class BookingService extends BaseEntityRestService<Bookmark> {
+public class ProjectRestService extends BaseEntityRestService<Bookmark> {
 
 
     @Inject @Created
@@ -48,7 +48,7 @@ public class BookingService extends BaseEntityRestService<Bookmark> {
     @Inject @Cancelled
     private Event<Bookmark> cancelledBookingEvent;
     
-    public BookingService() {
+    public ProjectRestService() {
         super(Bookmark.class);
     }
 

@@ -1,4 +1,4 @@
-package br.gov.prodepa.monster.project.ui;
+package br.gov.prodepa.monster.project.util.ui;
 
 import java.io.Serializable;
 import java.util.List;
