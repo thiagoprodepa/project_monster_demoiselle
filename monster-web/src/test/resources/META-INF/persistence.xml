@@ -7,11 +7,11 @@
 	-->
 	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
 
-		<class>br.gov.prodepa.bookmark.domain.Bookmark</class>
+		<class>br.gov.prodepa.monster.project.domain.Bookmark</class>
 		
-		<class>br.gov.prodepa.bookmark.domain.Setor</class>
-		<class>br.gov.prodepa.bookmark.domain.Projeto</class>
-		<class>br.gov.prodepa.bookmark.domain.Usuario</class>
+		<class>br.gov.prodepa.monster.project.domain.Setor</class>
+		<class>br.gov.prodepa.monster.project.domain.Projeto</class>
+		<class>br.gov.prodepa.monster.project.domain.Usuario</class>
 
 
 		<properties>
@@ -29,7 +29,7 @@
 	<persistence-unit name="bookmark-ds" transaction-type="RESOURCE_LOCAL">
 		<non-jta-data-source>java:/DefaultDS</non-jta-data-source>
 
-		<class>br.gov.prodepa.bookmark.domain.Bookmark</class>
+		<class>br.gov.prodepa.monster.project.domain.Bookmark</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
@@ -45,7 +45,7 @@
 	<persistence-unit name="bookmark-ds" transaction-type="JTA">
 		<jta-data-source>java:/DefaultDS</jta-data-source>
 
-		<class>br.gov.prodepa.bookmark.domain.Bookmark</class>
+		<class>br.gov.prodepa.monster.project.domain.Bookmark</class>
 
 		<properties>
 			<property name="hibernate.show_sql" value="true" />

@@ -4,8 +4,8 @@
 	<alternatives>
 		<class>br.gov.frameworkdemoiselle.transaction.JTATransaction</class>
 		
-		<class>br.gov.prodepa.bookmark.secutity.Autenticador</class>
-		<class>br.gov.prodepa.bookmark.secutity.Autorizador</class>
+		<class>br.gov.prodepa.monster.project.secutity.Autenticador</class>
+		<class>br.gov.prodepa.monster.project.secutity.Autorizador</class>
 		
 		<!--
 		<class>br.gov.frameworkdemoiselle.transaction.JPATransaction</class>

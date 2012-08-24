@@ -48,8 +48,8 @@ import br.gov.frameworkdemoiselle.exception.ExceptionHandler;
 import br.gov.frameworkdemoiselle.stereotype.ViewController;
 import br.gov.frameworkdemoiselle.transaction.Transactional;
 import br.gov.frameworkdemoiselle.util.Strings;
-import br.gov.prodepa.bookmark.business.SetorBC;
-import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.monster.project.business.SetorBC;
+import br.gov.prodepa.monster.project.domain.Setor;
 import contactlist.tablemodel.ContactTableModel;
 
 @ViewController

@@ -50,7 +50,6 @@ import org.jboss.weld.environment.se.StartMain;
 import org.jboss.weld.environment.se.bindings.Parameters;
 import org.jboss.weld.environment.se.events.ContainerInitialized;
 
-import contactlist.event.ExceptionEvent;
 import contactlist.frame.ContactFrame;
 
 public class Main {
@@ -76,7 +75,7 @@ public class Main {
 		});
 
 		EventQueue queue = Toolkit.getDefaultToolkit().getSystemEventQueue();
-		queue.push(new ExceptionEvent());
+		//queue.push(new ExceptionEvent());
 		EventQueue.invokeLater(new Runnable() {
 
 			public void run() {

@@ -42,7 +42,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.gov.prodepa.bookmark.domain.Setor;
+import br.gov.prodepa.monster.project.domain.Setor;
 
 public class ContactTableModel extends AbstractTableModel {
 
