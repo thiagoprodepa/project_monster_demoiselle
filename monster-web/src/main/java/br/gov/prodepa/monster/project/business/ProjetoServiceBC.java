@@ -57,7 +57,6 @@ public class ProjetoServiceBC extends JPACrud<Projeto, Long> {
 		if(dto == null) {
 			return findByExample(new Projeto());
 		} else {
-			
 			System.out.println(">>>>>>>> " + dto.getPattern());
 			return findByExample(new Projeto(dto.getPattern()));
 		}

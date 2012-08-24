@@ -20,7 +20,7 @@
 		<h:form id="form-lista-perfil" prependId="false">
 			
 			<rich:panel>
-			<f:facet name="header">Pesquisa</f:facet>
+			<f:facet name="header">Pesquisa Usuário</f:facet>
 				
 				<h:panelGrid columns="2" styleClass="grade" width="100%" >
 				
@@ -39,13 +39,13 @@
 						
 						<a4j:commandLink id="botao-search"
 								 action="#{usuarioListMB.search}"
-								 title="Voltar para pesquisa"
+								 title="Pesquisar"
 								 styleClass="secondary-button"
 								 style="text-align:right"
-								 render="usuariosGrid2"
+								 render="usuariosGrid"
 								 >
 							<h:graphicImage value="/images/ico_lupa.gif" />
-							<h:outputText value="Novo" />
+							<h:outputText value="Pesquisar" />
 						</a4j:commandLink>
 						<br/>
 						<a4j:commandLink id="botao-voltar"
@@ -63,7 +63,7 @@
 			</rich:panel>
 			
 		
-			<h:panelGrid id="usuariosGrid2" styleClass="gridPanel">
+			<h:panelGrid id="usuariosGrid" styleClass="gridPanel">
 			
 				<h:panelGroup rendered="#{empty usuarioListMB.usuarios}">
 					<h:outputText value="Nenhum resultado encontrado." />

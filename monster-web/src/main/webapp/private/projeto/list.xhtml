@@ -13,44 +13,65 @@
 		<h:graphicImage styleClass="pic" title="Navegação" value="/images/icons/application_form_magnify.png" />
 		<h:outputText value="Setor &#187; Pesquisa" />
 	</ui:define>
-
-	<ui:define name="pesquisa">
-		<h:form id="form-pesquisa-setor">
-		
-			<rich:panel>
-			<f:facet name="header">Pesquisa de Lotes</f:facet>		
-		
-				<h:panelGrid columns="2" styleClass="searchPanel, grade" columnClasses="search-inputs,search-controls" width="100%">
-					
-					<h:panelGrid id="form-pesquisa-inputs" columns="2" styleClass="grade" width="90%">
-						
-						<h:outputLabel value="Setor: " for="setor-nome" />
-						<h:inputText id="usuario-nome" value="#{searchsDto.pattern}" length="255" />
-	
-					</h:panelGrid>
-	
-					<h:panelGrid id="form-pesquisa-controls" styleClass="grade" width="10%" >
-						<a4j:commandButton value="Pesquisar" action="#{setorListMB.search(searchsDto)}"
-							   title="Pesquisar por Lotes" 
-							   size="50" type="submit" reRender="resultados" style="width:175px" styleClass="botao" /> 
-						
-					</h:panelGrid>
-				</h:panelGrid>
-			</rich:panel>
-		</h:form>
-	</ui:define>
 	
 	<ui:define name="conteudo">
+	
 		<!-- Resultado da pesquisa -->
-		<h:form id="form-lista-perfil">
-			<h:panelGrid styleClass="gridPanel">
-				<h:panelGroup rendered="#{empty setorListMB.resultList}">
+		<h:form id="form-lista-perfil" prependId="false">
+			
+			<rich:panel>
+			<f:facet name="header">Pesquisa Projeto</f:facet>
+				
+				<h:panelGrid columns="2" styleClass="grade" width="100%" >
+				
+					<h:panelGrid columns="2"
+							 	 styleClass="grade"
+								 columnClasses="grade_rotulo grade_2_p, grade_valor grade_2_g"
+								 style="text-align:left"
+								 width="70%">
+								 
+						<h:outputText value="Filtrar" />
+					    <h:inputText id="query" value="#{projetoMB.searchsDto.pattern}" style="width: 165px;" autocomplete="off" />
+						
+					</h:panelGrid>
+			
+					<h:panelGrid columns="1" styleClass="grade" width="30%">
+						
+						<a4j:commandLink id="botao-search"
+								 action="#{projetoMB.search}"
+								 title="Voltar para pesquisa"
+								 styleClass="secondary-button"
+								 style="text-align:right"
+								 render="projetosGrid"
+								 >
+							<h:graphicImage value="/images/ico_lupa.gif" />
+							<h:outputText value="Pesquisar" />
+						</a4j:commandLink>
+						<br/>
+						<a4j:commandLink id="botao-voltar"
+								 action="#{projetoMB.showFormView}"
+								 title="Voltar para pesquisa"
+								 styleClass="secondary-button"
+								 style="text-align:right"
+								 >
+							<h:graphicImage value="/images/disk.png" />
+							<h:outputText value="Novo" />
+						</a4j:commandLink>
+					</h:panelGrid>
+			
+			</h:panelGrid> 
+			</rich:panel>
+			
+		
+			<h:panelGrid id="projetosGrid" styleClass="gridPanel">
+			
+				<h:panelGroup rendered="#{empty projetoMB.projetos}">
 					<h:outputText value="Nenhum resultado encontrado." />
 				</h:panelGroup>
 				
-				<rich:dataTable id="usuarios" var="u" value="#{setorListMB.resultList}" 
+				<rich:dataTable id="projetos" var="u" value="#{projetoMB.projetos}" 
 					            rows="10" rowKeyVar="indice" cellpadding="0" cellspacing="0"
-					            styleClass="gridPanel" border="0" rendered="#{not empty setorListMB.resultList}">
+					            styleClass="gridPanel" border="0" >
 					
 					<rich:column id="column-indice" styleClass="iconColumn">
 						<f:facet name="header" />
@@ -70,84 +91,104 @@
 						</f:facet>
 						<h:outputText value="#{u.nome}" />
 					</rich:column>
+					                       
+                    <rich:column styleClass="iconColumn">
+						<f:facet name="header"><h:graphicImage value="/images/icon_view.png" style="border:0px" /></f:facet>
+						<a4j:commandLink render="projeto-view" action="#{projetoMB.select}" oncomplete="#{rich:component('projeto-view')}.show(); return false;">
+							<h:graphicImage value="/images/icon_view.png" style="border:0px" />
+							<f:param name="id" value="#{u.id}" />
+						</a4j:commandLink>
+					</rich:column>
 					
-					<rich:column headerClass="col_button" styleClass="iconColumn">  
-						<f:facet name="header"> 
-							<h:outputText value=""/> 
-						</f:facet> 
-						<a4j:commandLink id="showItem" action="#{loteAction.selecionar}" reRender="consulta" onclick="javascript:Richfaces.showModalPanel('mp_consulta');" title="Visualizar Lote"> 
-							<h:graphicImage value="../../images/ico_lupa.gif" style="border:0px"/> 
-						</a4j:commandLink> 
-					</rich:column> 
-					 
-					<h:column headerClass="col_button" styleClass="iconColumn"> 
-						<f:facet name="header"> 
-							<h:outputText value=""/> 
-						</f:facet> 
-						<a4j:commandLink action="#{loteAction.toPanelActions}" title="Painel de ações do lote"> 
-							<h:graphicImage value="../../images/ico_manter_lote.gif" style="border:0px" /> 
-						</a4j:commandLink> 
-					</h:column>  
+					<rich:column styleClass="iconColumn">
+						<f:facet name="header"><h:graphicImage value="/images/pencil.png" style="border:0px" /></f:facet>
+						<h:outputLink value="/project-monster/private/projeto/edit.jsf" >
+							<h:graphicImage value="/images/pencil.png" style="border:0px" />
+							<f:param name="id" value="#{u.id}" />
+						</h:outputLink>
+					</rich:column>
 					
-					<h:column headerClass="col_button" styleClass="iconColumn"> 
-						<f:facet name="header"> 
-							<h:outputText value=""/> 
-						</f:facet> 
-						<a4j:commandLink action="#{loteAction.selecionar}"  view="/aluno/lote/lote_update.xhtml" title="Alterar Lote">
-							<h:graphicImage value="../../images/pencil.png" style="border:0px" /> 
-						</a4j:commandLink> 
-					</h:column>
+					 <rich:column styleClass="iconColumn">
+						<f:facet name="header"><h:graphicImage value="/images/icon_lixo.png" style="border:0px" /></f:facet>
+						<a4j:commandLink render="projeto-delete" action="#{projetoMB.select}" oncomplete="#{rich:component('projeto-delete')}.show(); return false;">
+							<h:graphicImage value="/images/icon_lixo.png" style="border:0px" />
+							<f:param name="id" value="#{u.id}" />
+						</a4j:commandLink>
+					</rich:column>
 
 					<f:facet name="footer">
-						<rich:dataScroller id="paginador" for="usuarios" maxPages="10"
+						<rich:dataScroller id="paginador" for="projetos" maxPages="10"
 							stepControls="hide" renderIfSinglePage="false" />
 					</f:facet>
 				</rich:dataTable>
 			</h:panelGrid>
-		</h:form>
+
 		
-		<rich:popupPanel id="usuario-modal-panel" modal="true" autosized="true" resizeable="false" minWidth="450" minHeight="150" moveable="false">
-	        <f:facet name="header">
-	            <h:outputText value="Setor" />
-	        </f:facet>
-	        <f:facet name="controls">
-	            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('usuario-modal-panel')}.hide(); return false;">
-	                X
-	            </h:outputLink>
-	        </f:facet>
-	        
-	        <h:form>
-            	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
+			<rich:popupPanel id="projeto-view" modal="true" resizeable="false" width="150" height="110" moveable="true">
+		        <f:facet name="header">
+		            <h:outputText value="Visualizar Setor" />
+		        </f:facet>
+		        <f:facet name="controls">
+		            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('projeto-view')}.hide(); return false;">
+		                X
+		            </h:outputLink>
+		        </f:facet>
+	           	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
 					<h:panelGrid columns="2" styleClass="grid"
 						columnClasses="column-label, column-control">
 						
-						<h:outputLabel value="Chave: " for="usuario-chave" />
-						<h:outputText id="usuario-chave" value="#{usuarioDto.id}" />
+						<h:outputLabel value="Chave:" for="projeto-chave" />
+						<h:outputText value="#{projetoMB.projeto.id}" />
 						
-						<h:outputLabel value="Nome: " for="usuario-nome" />
-						<h:outputText id="usuario-nome" value="#{usuarioDto.nome}" />
-						
-						<h:outputLabel value="Login: " for="usuario-login" />
-						<h:outputText id="usuario-login" value="#{usuarioDto.login}" />
-						
-						<h:outputLabel value="Órgão: " for="usuario-orgao" />
-						<h:outputText id="usuario-orgao" value="#{usuarioDto.orgao.pessoa.nome}" />
-						
-						<h:outputLabel value="Situação: " for="usuario-situacao" />
-						<h:outputText id="usuario-situacao" value="#{usuarioDto.situacao.descricao}" />
+						<h:outputLabel value="Nome: " for="projeto-nome" />
+						<h:outputText value="#{projetoMB.projeto.nome}" />
+												
 					</h:panelGrid>
 				</h:panelGroup>
-				
 				<hr size="1" />
+				<br />
 				<h:panelGrid columns="2" styleClass="grid"
 					columnClasses="column-label, column-control">
 					<h:panelGroup style="text-align: right;">
 						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
-							onclick="#{rich:component('usuario-modal-panel')}.hide();" />
+							onclick="#{rich:component('projeto-view')}.hide();" />
 					</h:panelGroup>
 				</h:panelGrid>
-			</h:form>
-	    </rich:popupPanel>
-
+		    </rich:popupPanel>
+		    
+		    <rich:popupPanel id="projeto-delete" modal="true" resizeable="false" width="150" height="110" moveable="true">
+		        <f:facet name="header">
+		            <h:outputText value="Excluir Setor" />
+		        </f:facet>
+		        <f:facet name="controls">
+		            <h:outputLink value="#" styleClass="modal-panel-close-icon" onclick="#{rich:component('projeto-delete')}.hide(); return false;">
+		                X
+		            </h:outputLink>
+		        </f:facet>
+	           	<h:panelGroup layout="block" style="max-height: 185px; overflow: auto;">
+					<h:panelGrid columns="2" styleClass="grid"
+						columnClasses="column-label, column-control">
+						
+						<h:outputLabel value="Chave:" for="projeto-chave" />
+						<h:outputText value="#{projetoMB.projeto.id}" />
+						
+						<h:outputLabel value="Nome: " for="projeto-nome" />
+						<h:outputText value="#{projetoMB.projeto.nome}" />
+												
+					</h:panelGrid>
+				</h:panelGroup>
+				<hr size="1" /><br />
+				<h:panelGrid columns="2" styleClass="grid" columnClasses="column-label, column-control">
+					<h:panelGroup style="text-align: right;">
+						<h:commandLink value="Excluir" title="Excluir" action="#{projetoMB.delete}"
+							           onclick="#{rich:component('projeto-delete')}.hide();" styleClass="secondary-button" />
+						
+						<h:commandLink styleClass="secondary-button" value="Fechar" title="Fechar"
+						               onclick="#{rich:component('projeto-delete')}.hide();" />
+					</h:panelGroup>
+				</h:panelGrid>
+		    </rich:popupPanel>
+		    
+	 	</h:form>
 	</ui:define>
 </ui:composition>

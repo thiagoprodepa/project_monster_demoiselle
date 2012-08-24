@@ -1,4 +1,4 @@
-package br.gov.prodepa.monster.project.business;
+package br.gov.prodepa.monster.project.rest;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,9 +21,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import br.gov.prodepa.monster.project.business.BaseEntityService;
 import br.gov.prodepa.monster.project.domain.Bookmark;
-import br.gov.prodepa.monster.project.rest.Cancelled;
-import br.gov.prodepa.monster.project.rest.Created;
 
 /**
  * <p>
